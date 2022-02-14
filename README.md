@@ -1,1 +1,2 @@
-# test
+# KOSTA - IoT양성과정 
+
