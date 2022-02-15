@@ -18,12 +18,18 @@
     <ClCompile Include="C_step1.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="C_main.c">
+    <ClCompile Include="C_main_step1.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="C_step2.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="c언어기본헤더.h">
+    <ClInclude Include="step1.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="cursor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

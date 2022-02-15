@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="C_step1.c" />
-    <ClCompile Include="C_main.c" />
+    <ClCompile Include="C_main_step1.c" />
+    <ClCompile Include="C_step2.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="c언어기본헤더.h" />
+    <ClInclude Include="cursor.h" />
+    <ClInclude Include="step1.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
