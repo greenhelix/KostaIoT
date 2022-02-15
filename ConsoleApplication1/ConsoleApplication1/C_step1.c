@@ -1,4 +1,5 @@
 ﻿#include <stdio.h>
+
 void whatIsVariable()
 {
 	int a = 1;
@@ -71,4 +72,20 @@ void whatIsPrintf() {
 	printf("###%05d###\n", value2);
 	printf("###%-5d###\n", value2);
 
+}
+
+void whatIsScanf() {
+	int age;
+	float height;
+	char name[32];
+
+	printf("나이를 입력하세요 : ");
+	scanf_s("%d", &age);
+	printf("키를 입력하세요 : ");
+	scanf_s("%f", &height);
+	printf("이름을 입력하세요 : ");
+	scanf_s("%s", name, 32);
+	printf("안녕하세요. %d살, 키 %.2fcm의 %s님\n", age, height, name);
+
+	
 }

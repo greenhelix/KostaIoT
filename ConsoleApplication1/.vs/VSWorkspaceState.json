@@ -1,9 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\ConsoleApplication1\\x64",
-    "\\x64"
+    "\\ConsoleApplication1",
+    "\\ConsoleApplication1\\x64\\Debug"
   ],
-  "SelectedNode": "\\ConsoleApplication1",
+  "SelectedNode": "\\ConsoleApplication1\\C_main.c",
   "PreviewInSolutionExplorer": false
 }

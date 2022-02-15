@@ -4,3 +4,4 @@ void whatIsPointer();
 void whatIsTypeDef();
 void whatIsDefine();
 void whatIsPrintf();
+void whatIsScanf(); 

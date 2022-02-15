@@ -30,4 +30,8 @@ int main()
 
 	// ÁøÀ§Çü Boolean true = 1, false = 0 
 	whatIsDefine();
+
+	whatIsScanf();
+
+	
 }

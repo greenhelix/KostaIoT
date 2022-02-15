@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ConsoleApplication1",
+    "\\ConsoleApplication1\\ConsoleApplication1",
+    "\\HelloWorld"
   ],
-  "SelectedNode": "\\C:\\Users\\USER\\Source\\Repos\\greenhelix\\KostaIoT",
+  "SelectedNode": "\\ConsoleApplication1\\ConsoleApplication1\\c언어기본헤더.h",
   "PreviewInSolutionExplorer": false
 }
