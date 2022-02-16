@@ -1,3 +1,0 @@
-hello kosta
-테스트 파일입니다. 
-kosta repo 이름 변경 
