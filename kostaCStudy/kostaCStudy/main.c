@@ -8,17 +8,35 @@
 int main()
 {
 	// 변수
-	whatIsVariable();
-	whatIsEnum();
-	whatIsPointer();
-	whatIsScanf();
-	whatIsCursor();
+	//whatIsVariable();
+	//whatIsEnum();
+	//whatIsPointer();
+	//whatIsScanf();
+	//whatIsCursor();
 
 	// 연산자
-	whatIsArithmatic(); //산술연산자
-	whatIsModular(); // 나머지연산자
-	whatIsPrepost(); // 
-	whatIsPriority();
-	whatIsConvert();
-	whatIsCast();
+	//whatIsArithmatic(); //산술연산자
+	//whatIsModular(); // 나머지연산자
+	//whatIsPrepost(); // 
+	//whatIsPriority();
+	//whatIsConvert();
+	//whatIsCast();
+
+	// 조건문 
+	//whatIsIf();
+	//whatIsComparison(); //비교연산자
+	//whatIsLogical();
+	//whatIsTernary();
+	//whatIsSwitch();
+	//movesharp();
+
+	// 반복문
+	//sum100();
+	//sharpAni();
+	//commaOperator();
+	//makeTriangle();
+	makeDiamond();
+	//whatIsWhile();
+	//randNum();
+
 }

@@ -24,11 +24,14 @@
     <ClCompile Include="step2.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="step3.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step4.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cursor.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="header.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>

@@ -22,9 +22,10 @@
     <ClCompile Include="main.c" />
     <ClCompile Include="step1.c" />
     <ClCompile Include="step2.c" />
+    <ClCompile Include="step3.c" />
+    <ClCompile Include="step4.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="cursor.h" />
     <ClInclude Include="header.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
