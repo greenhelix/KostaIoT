@@ -4,7 +4,7 @@
 #pragma warning(disable:4996)
 
 // 조건문
-void whatIsIf() 
+void whatIsIf()
 {
 	int input;
 
@@ -12,7 +12,7 @@ void whatIsIf()
 	scanf_s("%d", &input);
 	if (input == 5)
 		puts("정답입니다.");
-	
+
 	int input2;
 
 	printf("2 + 8을 입력하세요 : ");
@@ -35,7 +35,7 @@ void whatIsIf()
 }
 
 // 비교연산
-void whatIsComparison() 
+void whatIsComparison()
 {
 	int attend = 85;
 	int point;
@@ -75,26 +75,26 @@ void whatIsLogical()
 }
 
 // 삼항 조건 연산
-void whatIsTernary() 
+void whatIsTernary()
 {
 	int kim = 182, lee = 174, tall;
 	tall = kim > lee ? kim : lee;
 	printf("큰 사람 = %d\n", tall);
-	
+
 	int age;
 	printf("나이를 입력하세요: ");
 	scanf_s("%d", &age);
 	printf("%s\n", age > 19 ? "이 사람은 성인이다." : "이 사람은 성인이 아니다.");
 	printf("이 사람은 성인이%s다. \n ", age > 19 ? "" : " 아니");
 
-	int num; 
+	int num;
 	printf("숫자를 입력하세요: ");
 	scanf_s("%d", &num);
 	printf("%d는 %s수입니다.\n", num, num % 2 == 0 ? "짝" : "홀");
 
 }
 
-void whatIsSwitch() 
+void whatIsSwitch()
 {
 	int num;
 
@@ -102,7 +102,7 @@ void whatIsSwitch()
 	scanf_s("%d", &num);
 
 	switch (num) {
-	case 1: 
+	case 1:
 		puts("one");
 		break;
 	case 2:
@@ -118,7 +118,7 @@ void whatIsSwitch()
 
 	/* break 생략하기
 	break를 생략하면 두개 이상의 case를 연이어 실행가능하다. */
-	
+
 	// fall
 	printf("토정 비결을 보시겠습니까? (Y/N) ");
 	int ch = getch();
