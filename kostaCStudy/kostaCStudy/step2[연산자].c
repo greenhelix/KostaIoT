@@ -1,4 +1,6 @@
 #include <stdio.h>
+
+// 연산자
 void whatIsOperator() {
 	printf("sizeof \n (type) : cast convert 용으로 사용 \n new delete ::, * ->* 메모리 할당에 유용한 연산자 c++이다 \n 증감/ 관계 / 논리 / 비트 / 산술 / 부호 / 등이 많이 사용된다. // 사용하면서 익숙해지는 것이 좋다. ");
 

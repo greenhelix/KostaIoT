@@ -3,7 +3,7 @@
 #include <cursor.h>
 #pragma warning(disable:4996)
 
-// 반복문 
+// ????? 
 void sum100()
 {
 	/*int sum = 0;
@@ -11,32 +11,32 @@ void sum100()
 	{
 		sum += i;
 	}
-	printf("1~100의 합 = %d\n", sum);
+	printf("1~100?? ?? = %d\n", sum);
 	*/
 
-	// 등차수열 
+	// ???????? 
 	// sum = (n(a1+aN))/2
 	long double sum2 = 0; 
 	sum2 = (1 + (4000000000 + 1)) / 2;
 
-	printf("1~4000000000의 합 = %p\n", sum2);
+	printf("1~4000000000?? ?? = %p\n", sum2);
 }
 
-// # 자동 움직이기
+// # ??? ???????
 void sharpAni()
 {
 	clrscr();
 	for (int i = 1; i < 30; i++)
 	{
-		// 이동하는 것처럼 보이게 하는 원리이다.
-		// #을 보여줬다가 없어지게 했다를 반복하는 것임.
+		// ?????? ????? ????? ??? ???????.
+		// #?? ???????? ???????? ???? ?????? ????.
 		gotoxy(i, 10); putch('#');
 		gotoxy(i-1, 10); putch(' ');
-		delay(100); // 0.1초에 한번 깜빡거리며 이동한다.   
-	} // 총 100 * 30 : 3초 정도 지속 된다. 
+		delay(100); // 0.1??? ??? ????????? ??????.   
+	} // ?? 100 * 30 : 3?? ???? ???? ???. 
 }
 
-// 이중 루프 실습 
+// ???? ???? ??? 
 void makeTriangle()
 {
 	// rect 
@@ -153,7 +153,7 @@ void makeTriangle()
 
 	//for (int i = 0; i <= 75; i++)
 	//{
-	//	// 10 : 밑에서 10번째 
+	//	// 10 : ????? 10???? 
 	//	gotoxy(i, 10);
 	//	if (i%2 == 0)
 	//	{
@@ -180,26 +180,29 @@ void makeTriangle()
 
 void makeDiamond()
 {
-	for (int y = 0; y < 40; y++)
+	/*int n;
+	scanf_s("%d", &n);*/
+	for (int y = 0; y < 10; y++)
 	{
-		for (int x = 0; x < 40 - y; x++)
+		for (int x = 0; x < 10 - y; x++)
 		{
 			printf(" ");
 		}
 
-		for (int k = 0; k <= y*2; k++)
+		for (int k = 0; k <= 2*y; k++)
 		{
 			printf("*");
 		}
 		puts("");
 	}
-	for (int y = 0; y < 40; y++)
+
+	for (int y = 0; y < 10; y++)
 	{
-		for (int x = 0; x < y; x++)
+		for (int x = 0; x <y; x++)
 		{
 			printf(" ");
 		}
-		for (int k = 0; k < 2*(40-y)-1; k++) {
+		for (int k = 0; k < 2*(10-y)-1; k++) {
 			printf("*");
 		}
 		puts("");
@@ -208,7 +211,7 @@ void makeDiamond()
 }
 
 
-// 쉼표 연산자
+// ??? ??????
 void commaOperator()
 {
 	int a, b; 
@@ -224,7 +227,7 @@ void whatIsWhile()
 		printf(".");
 		delay(30);
 	}
-	printf("\n배터리 %d%% 충전 완료\n", battery);
+	printf("\n????? %d%% ???? ???\n", battery);
 
 	int sum = 0;
 	int i = 1;
@@ -232,7 +235,7 @@ void whatIsWhile()
 		sum += i;
 		i++;
 	}
-	printf("1~100까지의 합 = %d\n", sum);
+	printf("1~100?????? ?? = %d\n", sum);
 }
 
 void randNum()
@@ -243,9 +246,9 @@ void randNum()
 	randomize();
 	for (;;) {
 		num = random(100) + 1; 
-		puts("제가 만든 숫자를 맞춰 보세요.");
+		puts("???? ???? ????? ???? ??????.");
 		do {
-			printf("숫자를 입력하세요(끝날 때는 999) : ");
+			printf("????? ????????(???? ???? 999) : ");
 			scanf_s("%d", &input);
 
 			if (input == 999) {
@@ -253,13 +256,13 @@ void randNum()
 			}
 
 			if (input == num) {
-				puts("맞췄습니다. \n");
+				puts("????????. \n");
 			}
 			else if (input > num) {
-				puts("입력한 숫자보다 더 작습니다.");
+				puts("????? ??????? ?? ??????.");
 			}
 			else {
-				puts("입력한 숫자보다 더 큽니다.");
+				puts("????? ??????? ?? ????.");
 			}
 		} while (input != num);
 	}

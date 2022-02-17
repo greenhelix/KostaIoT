@@ -18,16 +18,19 @@
     <ClCompile Include="main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step1.c">
+    <ClCompile Include="step1[변수].c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step2.c">
+    <ClCompile Include="step2[연산자].c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step3.c">
+    <ClCompile Include="step3[조건문].c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step4.c">
+    <ClCompile Include="step4[반복문].c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step5[함수].c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

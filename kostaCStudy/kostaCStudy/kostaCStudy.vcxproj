@@ -20,10 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="step1.c" />
-    <ClCompile Include="step2.c" />
-    <ClCompile Include="step3.c" />
-    <ClCompile Include="step4.c" />
+    <ClCompile Include="step1[변수].c" />
+    <ClCompile Include="step2[연산자].c" />
+    <ClCompile Include="step3[조건문].c" />
+    <ClCompile Include="step4[반복문].c" />
+    <ClCompile Include="step5[함수].c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h" />
@@ -124,7 +125,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>

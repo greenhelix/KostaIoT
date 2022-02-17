@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "cursor.h"
 
+// 변수/파생형
 void whatIsVariable()
 {
 	// 기본 변수명들의 사용법
@@ -26,8 +27,12 @@ void whatIsPointer() {
 
 	// 포인터를 경유하여 간접적으로 값을 액세스한다.
 
-	int value = 38;
-	int* pi;
+	int value1 = 38, value2;
+	int *pi;
+	pi = &value1;
+	value2 = *pi; 
+	printf("value1 = %d, value2 = %d\n", value1, value2);
+
 }
 void whatIsScanf() {
 	float height;

@@ -1,42 +1,49 @@
 #include <stdio.h>
 #include "header.h"
 
-// ÀÌ·¸°Ô °è¼Ó ¿Ã¸®¸é ¸¹¾ÆÁö°í ±æ¾îÁö¹Ç·Î ÀÌ·¯ÇÑ ÇÔ¼öµéÀ» ÆÄÀÏ·Î ±¸ºÐÇØÁØµÚ
-// Çì´õÆÄÀÏ·Î ¸¸µé¾îÁØ´Ù. 
-// include¸¦ ÅëÇØ¼­ °¡Á®¿Â´Ù. 
+// ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿?ï¿½Ã¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿?ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½Ô¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øµï¿½
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿?ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿? 
+// includeï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½. 
 
 int main()
 {
-	// º¯¼ö
+	// ï¿½ï¿½ï¿½ï¿½
 	//whatIsVariable();
 	//whatIsEnum();
 	//whatIsPointer();
 	//whatIsScanf();
 	//whatIsCursor();
 
-	// ¿¬»êÀÚ
-	//whatIsArithmatic(); //»ê¼ú¿¬»êÀÚ
-	//whatIsModular(); // ³ª¸ÓÁö¿¬»êÀÚ
-	//whatIsPrepost(); // 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	//whatIsArithmatic(); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿?
+	//whatIsModular(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	whatIsPrepost(); // 
 	//whatIsPriority();
 	//whatIsConvert();
 	//whatIsCast();
 
-	// Á¶°Ç¹® 
+	// ï¿½ï¿½ï¿½Ç¹ï¿½ 
 	//whatIsIf();
-	//whatIsComparison(); //ºñ±³¿¬»êÀÚ
+	//whatIsComparison(); //ï¿½ñ±³¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	//whatIsLogical();
 	//whatIsTernary();
 	//whatIsSwitch();
 	//movesharp();
 
-	// ¹Ýº¹¹®
+	// ï¿½Ýºï¿½ï¿½ï¿½
 	//sum100();
 	//sharpAni();
 	//commaOperator();
 	//makeTriangle();
-	makeDiamond();
+	//makeDiamond();
 	//whatIsWhile();
 	//randNum();
+
+
+	// ï¿½Ô¼ï¿½ 
+	//whatIsFunction();
+	/*GetSum(1, 10);
+	printf("ï¿½Ã°ï¿½: %d", GetHour());
+	GetHours();*/
 
 }
