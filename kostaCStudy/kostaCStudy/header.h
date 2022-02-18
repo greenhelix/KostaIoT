@@ -31,3 +31,11 @@ void whatIsWhile();
 void randNum();
 
 void inch();
+void drawBox();
+void OutBoxMessage(char *str);
+void OutBoxMessgae1(char* str);
+
+
+void floorFunction();
+void castInt();
+void banolim();
