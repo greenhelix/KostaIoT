@@ -35,8 +35,10 @@ int main()
 	//sharpAni();
 	//commaOperator();
 	//makeTriangle();
-	makeDiamond();
+	//makeDiamond();
 	//whatIsWhile();
 	//randNum();
 
+
+	inch();
 }

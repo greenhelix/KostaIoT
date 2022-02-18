@@ -29,3 +29,5 @@ void makeTriangle();
 void makeDiamond();
 void whatIsWhile();
 void randNum();
+
+void inch();
