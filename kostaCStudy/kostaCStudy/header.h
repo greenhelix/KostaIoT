@@ -30,12 +30,20 @@ void makeDiamond();
 void whatIsWhile();
 void randNum();
 
+// 함수
 void inch();
 void drawBox();
 void OutBoxMessage(char *str);
 void OutBoxMessgae1(char* str);
 
-
+// 전처리기
 void floorFunction();
 void castInt();
 void banolim();
+void absrange();
+void sinCal();
+
+// 표준함수 
+void whatIsExit();
+void whatIsAbort();
+int whatIsSystem();

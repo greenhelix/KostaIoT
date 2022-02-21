@@ -1,6 +1,4 @@
 // 전처리기 
-
-
 #include <stdio.h>
 #define INCH 2.54
 

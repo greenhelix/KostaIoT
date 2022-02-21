@@ -39,6 +39,8 @@ int main()
 	//whatIsWhile();
 	//randNum();
 
+
+	// 함수 
 	//inch();
 	//drawBox();
 	//OutBoxMessage("박스를 그리고 그 안에 문자열을 출력한다.");
@@ -48,8 +50,15 @@ int main()
 	//OutBoxMessgae1("전달된 문자열의 길이에 적당한 박스를 스스로 계산한다.");
 	//OutBoxMessgae1("신기하군");
 
-
-	floorFunction();
-	castInt();
-	banolim();
+	// 전처리기
+	//floorFunction();
+	//castInt();
+	//banolim();
+	//absrange();
+	//sinCal();
+	
+	// 표준함수
+	//whatIsExit();
+	//whatIsAbort();
+	whatIsSystem();
 }
