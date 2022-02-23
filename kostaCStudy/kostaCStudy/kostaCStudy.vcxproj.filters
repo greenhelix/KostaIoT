@@ -18,19 +18,37 @@
     <ClCompile Include="main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step1[변수].c">
+    <ClCompile Include="step1_variable.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step2[연산자].c">
+    <ClCompile Include="step2_operator.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step3[조건문].c">
+    <ClCompile Include="step3_if.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step4[반복문].c">
+    <ClCompile Include="step4_for.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step5[함수].c">
+    <ClCompile Include="step5_fun.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step6_macro.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step7_standardFun.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step9_pointer.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step8_array.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step10_double_pointer.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step11.array_pointer.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

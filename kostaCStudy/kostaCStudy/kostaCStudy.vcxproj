@@ -20,11 +20,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
-    <ClCompile Include="step1[변수].c" />
-    <ClCompile Include="step2[연산자].c" />
-    <ClCompile Include="step3[조건문].c" />
-    <ClCompile Include="step4[반복문].c" />
-    <ClCompile Include="step5[함수].c" />
+    <ClCompile Include="step11.array_pointer.c" />
+    <ClCompile Include="step1_variable.c" />
+    <ClCompile Include="step2_operator.c" />
+    <ClCompile Include="step3_if.c" />
+    <ClCompile Include="step4_for.c" />
+    <ClCompile Include="step5_fun.c" />
+    <ClCompile Include="step6_macro.c" />
+    <ClCompile Include="step7_standardFun.c" />
+    <ClCompile Include="step9_pointer.c" />
+    <ClCompile Include="step8_array.c" />
+    <ClCompile Include="step10_double_pointer.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h" />

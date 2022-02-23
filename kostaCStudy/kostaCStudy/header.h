@@ -47,3 +47,14 @@ void sinCal();
 void whatIsExit();
 void whatIsAbort();
 int whatIsSystem();
+
+// ∆˜¿Œ≈Õ 
+void InputName(char** pName);
+void PointerExample1();
+int PointerExample2();
+int pointerMinus();
+
+int pointerPlus();
+void test();
+void dynamicString();
+

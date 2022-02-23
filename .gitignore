@@ -364,3 +364,16 @@ FodyWeavers.xsd
 /.vs
 /.vscode
 /kostaCStudy/.vs/kostaCStudy/config
+kostaCStudy/.vs/kostaCStudy/project-colors.json
+kostaCStudy/.vs/kostaCStudy/v17/Browse.VC.db-shm
+kostaCStudy/.vs/kostaCStudy/v17/Browse.VC.db-wal
+kostaCStudy/kostaCStudy/game.c
+kostaCStudy/kostaCStudy/kostaCStudy.vcxproj
+kostaCStudy/kostaCStudy/kostaCStudy.vcxproj.filters
+kostaCStudy/kostaCStudy/target.exe
+kostaCStudy/kostaCStudy/.vscode/c_cpp_properties.json
+playground/.vscode/c_cpp_properties.json
+playground/.vscode/launch.json
+playground/.vscode/settings.json
+kostaCStudy/kostaCStudy/kostaCStudy.vcxproj
+kostaCStudy/kostaCStudy/kostaCStudy.vcxproj.filters

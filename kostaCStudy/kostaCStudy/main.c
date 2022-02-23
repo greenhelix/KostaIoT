@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "header.h"
+#include <malloc.h>
+#include <string.h>
 
 // 이렇게 계속 올리면 많아지고 길어지므로 이러한 함수들을 파일로 구분해준뒤
 // 헤더파일로 만들어준다. 
@@ -60,5 +62,28 @@ int main()
 	// 표준함수
 	//whatIsExit();
 	//whatIsAbort();
-	whatIsSystem();
+	//whatIsSystem();
+
+	// 포인터
+	/*int i = 1234;
+	int* pi;
+	int** ppi;
+
+	pi = &i;
+	ppi = &pi;
+
+	printf("%d\n", **ppi);
+	char* name;
+
+	InputName(&name);
+	printf("이름은 %s입니다\n", name);
+	free(name);
+	*/
+
+	//PointerExample1();
+	//pointerMinus();
+	//pointerPlus();
+	test();
+	dynamicString();
+
 }
