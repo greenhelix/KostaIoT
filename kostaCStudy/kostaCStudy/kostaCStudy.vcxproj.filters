@@ -48,7 +48,16 @@
     <ClCompile Include="step10_double_pointer.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="step11.array_pointer.c">
+    <ClCompile Include="step11_array_pointer.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step12_string.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step13_struct.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step14_bit_operator.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

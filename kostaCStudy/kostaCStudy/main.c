@@ -65,25 +65,37 @@ int main()
 	//whatIsSystem();
 
 	// 포인터
-	/*int i = 1234;
-	int* pi;
-	int** ppi;
-
-	pi = &i;
-	ppi = &pi;
-
-	printf("%d\n", **ppi);
-	char* name;
-
-	InputName(&name);
-	printf("이름은 %s입니다\n", name);
-	free(name);
-	*/
-
 	//PointerExample1();
 	//pointerMinus();
 	//pointerPlus();
-	test();
-	dynamicString();
+	//test();
+	//dynamicString();
 
+	// 배열 
+	//ArrayOfArray();
+	//ArrayDefine();
+	
+	// 메모리 관리 문자열
+	//mamoryMange();
+
+	// 문자열 
+	//stringLiteral();
+	//StringCopy();
+	//StringNumCopy();
+	//StringLength();
+	//SprintfFun();
+	//ArrayAndString();
+
+	//WhatIsStruct();
+	//NestedStruct();
+	//ShallowCopy();
+
+	// 비트 연산자 
+	BitOperator();
+	puts("-----------------------");
+	BitRotate();
+	puts("-----------------------");
+	BitStruct();
+	puts("-----------------------");
+	UnionBit();
 }

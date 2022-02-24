@@ -57,4 +57,29 @@ int pointerMinus();
 int pointerPlus();
 void test();
 void dynamicString();
+void ArrayDefine();
 
+void ArrayOfArray();
+
+// 문자열 
+void stringLiteral();
+void ArrayAndString();
+void StringLength();
+void StringNumCopy();
+void StringCopy();
+void SprintfFun();
+
+// 메모리 관리 문자열 
+void mamoryMange();
+
+
+// 구조체
+void WhatIsStruct();
+int NestedStruct();
+void ShallowCopy();
+
+// 비트 연산자 
+void BitOperator();
+void BitRotate();
+void BitStruct();
+void UnionBit();

@@ -7,7 +7,7 @@
 void InputName(char** pName)
 {
     *pName = (char*)malloc(32);
-    strcpy(*pName, "kim sang hyung");
+    //strcpy(*pName, "kim sang hyung");
 }
 
 void PointerExample1()
@@ -85,7 +85,7 @@ int dynamicString2()
     }
 
     for (i = 0; i < num; i++) {
-        sprintf(name[i], "string %d", i);
+        sprintf_s(name[i], "string %d", i);
         puts(name[i]);
     }
 
