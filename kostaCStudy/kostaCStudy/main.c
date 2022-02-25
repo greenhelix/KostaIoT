@@ -2,6 +2,8 @@
 #include "header.h"
 #include <malloc.h>
 #include <string.h>
+#include <io.h>
+#include <fcntl.h>
 
 // 이렇게 계속 올리면 많아지고 길어지므로 이러한 함수들을 파일로 구분해준뒤
 // 헤더파일로 만들어준다. 
@@ -91,11 +93,27 @@ int main()
 	//ShallowCopy();
 
 	// 비트 연산자 
-	BitOperator();
-	puts("-----------------------");
-	BitRotate();
-	puts("-----------------------");
-	BitStruct();
-	puts("-----------------------");
-	UnionBit();
+	//BitOperator();
+	//puts("-----------------------");
+	//BitRotate();
+	//puts("-----------------------");
+	//BitStruct();
+	//puts("-----------------------");
+	//UnionBit();
+
+
+	// 파일 출력하기 
+	//puts("----------파일 출력하기-------------");
+	//MakeTextFile();
+	//puts("-----------------------");
+	//BlockIO();
+	//puts("-----------------------");
+	//randomaccess();
+	//FileOpenClose();
+
+	//AddCountAccess();
+
+
+	// 게임 제작 실슴
+	Sokoban();
 }

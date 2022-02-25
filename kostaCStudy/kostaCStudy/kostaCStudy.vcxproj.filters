@@ -60,9 +60,18 @@
     <ClCompile Include="step14_bit_operator.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="step15_make_file.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="step16_make_game.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="gamepack.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

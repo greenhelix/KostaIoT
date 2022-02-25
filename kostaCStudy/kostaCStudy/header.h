@@ -83,3 +83,14 @@ void BitOperator();
 void BitRotate();
 void BitStruct();
 void UnionBit();
+
+// 파일 출력하기
+void MakeTextFile();
+void BlockIO();
+void randomaccess();
+void FileOpenClose();
+void AddCountAccess();
+
+
+// 게임 만들기
+void Sokoban();

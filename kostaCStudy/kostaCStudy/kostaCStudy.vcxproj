@@ -24,6 +24,8 @@
     <ClCompile Include="step12_string.c" />
     <ClCompile Include="step13_struct.c" />
     <ClCompile Include="step14_bit_operator.c" />
+    <ClCompile Include="step15_make_file.c" />
+    <ClCompile Include="step16_make_game.c" />
     <ClCompile Include="step1_variable.c" />
     <ClCompile Include="step2_operator.c" />
     <ClCompile Include="step3_if.c" />
@@ -37,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h" />
+    <ClInclude Include="gamepack.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
