@@ -5,12 +5,13 @@
 #define putsxy(x,y,s) {gotoxy(x,y); puts(s);}
 
 int user;
-int x, y;
 int user_x, user_y;
-int move_x, move_y;
+int undoX, undoY;
+
 char map[mapRow][mapCol];
-BOOL theEnd;
-enum {ESC = 27,LEFT = 75,RIGHT = 77,UP = 72,DOWN = 80}; // 열거형 (키값을 아스키 코드로 가져와서 선언해둔다.)
+char undoStage[mapRow][mapCol];
+
+enum {ESC = 27, LEFT = 75, RIGHT = 77,UP = 72,DOWN = 80, UNDO = 9 }; // 열거형 (키값을 아스키 코드로 가져와서 선언해둔다.)
 
 char mapData[mapRow][mapCol] = {
 	"####################",
@@ -33,9 +34,7 @@ char mapData[mapRow][mapCol] = {
 	"####################"
 };
 
-void clearScreen() {
-	clrscr();
-}
+
 
 void readyMap() {
 	showcursor(FALSE);
@@ -43,58 +42,54 @@ void readyMap() {
 }
 
 void FindUserPosition() {
-	for (y = 0; y < 18; y++) {
-		for (x = 0; x < 20; x++) {
+	for (user_y = 0; user_y < mapRow; user_y++) {
+		for (user_x = 0; user_x < mapCol - 1; user_x++) {
 
-			if (map[y][x] == '@') {
-				user_x = x;
-				user_y = y;
-				map[y][x] = ' ';
+			if (map[user_y][user_x] == '@') {
+				map[user_y][user_x] = ' ';
+				return;
 			}
 		}
 	}
 }
 
-void UserMoving() {
-	switch (user)
-	{
-	case LEFT:
-		move_x = -1;
-		break;
-	case RIGHT:
-		move_x = 1;
-		break;
-	case UP:
-		move_y = -1;
-		break;
-	case DOWN:
-		move_y = 1;
-		break;
-	}
-}
-
-void DrawMap() {
-	for (y = 0; y < 18; y++) {
+void redraw()
+{
+	for (int y = 0; y < mapRow; y++) {
 		putsxy(0, y, map[y]);
+
 	}
+	putchxy(user_x, user_y, '@');
+
 }
 
 int UserSetAndMoving()
 {
-	// 찾아둔 유저 위치에 @넣어주기 
-	putchxy(user_x, user_y, '@');
-
+	int move_x = 0, move_y = 0;
 	// 유저 이동 
 	user = _getch();
 	if (user == 0xE0 || user == 0)
 	{
+		putsxy(45, 7, "    ");
 		user = _getch();
-		move_x = move_y = 0;
-		UserMoving();
 
+		switch (user)
+		{
+		case LEFT:
+			move_x = -1;
+			break;
+		case RIGHT:
+			move_x = 1;
+			break;
+		case UP:
+			move_y = -1;
+			break;
+		case DOWN:
+			move_y = 1;
+			break;
+		}
 
-		// 이동 알고리즘 조건문
-		// 벽이 아니라면 이동한다
+		// 이동 알고리즘 조건문 // 벽이 아니라면 이동한다
 		if (map[user_y + move_y][user_x + move_x] != '#')
 		{
 
@@ -106,6 +101,10 @@ int UserSetAndMoving()
 				if (map[user_y + move_y * 2][user_x + move_x * 2] == ' ' ||
 					map[user_y + move_y * 2][user_x + move_x * 2] == '.')
 				{
+					//되돌리기
+					memcpy(undoStage, map, sizeof(map));
+					undoX = user_x;
+					undoY = user_y;
 
 					// 창고 위치라면 빈공간으로 가거나, 창고에서 이동하거나
 					if (map[user_y + move_y][user_x + move_x] == '.')
@@ -138,20 +137,45 @@ int UserSetAndMoving()
 		// 벽이 아닌경우 사용자가 esc를 누르면 강제 종료
 		if (user == ESC)
 		{
-			return 1;
+			return 0;
+		}
+		else if (user == UNDO ) {
+			putsxy(45, 6, "되돌리기를 눌렀습니다.");
+			memcpy(map, undoStage, sizeof(map));
+			user_x = undoX;
+			user_y = undoY;
+			redraw();
 		}
 	}
-	return 0;
+	return 1;
 }
 
-void ResultCheck() {
-	// 결과 검사
-	for (y = 0; y < 18; y++)
+
+
+void clearScreen() {
+	clrscr();
+	putsxy(45, 2, "SOKOBAN~~");  // 게임판에 글씨 박기
+	putsxy(45, 4, "ESC 키를 눌러 종료합니다.");
+}
+
+
+int ResultCheck() {
+	BOOL theEnd = TRUE;
+	// 결과확인
+	for (int y = 0; y < mapRow; y++)
 	{
-		for (x = 0; x < 20; x++) {
+		for (int x = 0; x < mapCol; x++) {
+
 			if (map[y][x] == '.') {
 				theEnd = FALSE;
 			}
 		}
 	}
+	if (theEnd) {
+		clrscr();
+		putsxy(10, 10, "참 잘했습니다.");
+		delay(2000);
+		return 0;
+	}
+	return 1;
 }
