@@ -44,24 +44,24 @@ public:
 	int GetInput() { return input; }
 };
 
-int main()
-{
-	RandomNumber R;
-	Ask A;
-
-	for (;;) {
-		R.Generate();
-		A.Prompt();
-
-		for (;;) {
-			if (A.AskUser()) {
-				exit(0);
-			}
-			if (R.Compare(A.GetInput())) {
-				break;
-			}
-		}
-	}
-}
+//int main()
+//{
+//	RandomNumber R;
+//	Ask A;
+//
+//	for (;;) {
+//		R.Generate();
+//		A.Prompt();
+//
+//		for (;;) {
+//			if (A.AskUser()) {
+//				exit(0);
+//			}
+//			if (R.Compare(A.GetInput())) {
+//				break;
+//			}
+//		}
+//	}
+//}
 
 
