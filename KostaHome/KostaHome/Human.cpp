@@ -51,4 +51,5 @@ int Humanmain() {
 	kim.SetName("Kim Ik Hwan");
 	kim.SetAge(145);
 	kim.intro();
+	return 0;
 }

@@ -3,7 +3,7 @@
 
 class StaticObjCount {
 private:
-	int value;
+	int value = 0;
 	static int ccount;
 
 
@@ -32,4 +32,6 @@ int StaticObjCntMain() {
 	oc.OutCount();
 
 	printf("Å©±â = %d\n", (int)sizeof(oc));
+	return 0;
+
 }

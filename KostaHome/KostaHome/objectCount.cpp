@@ -34,4 +34,6 @@ int ObjCntMain() {
 	oc.OutCount();
 
 	printf("Å©±â = %d\n", (int)sizeof(oc));
+	return 0;
+
 }

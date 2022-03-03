@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include "cursor.h"
+#pragma warning(disable: 4996)
 
 class Car {
 private:
@@ -65,7 +66,7 @@ public:
 	}
 };
 
-int CarMain() {
+int Carmain() {
 	Car C;
 	int ch; 
 
@@ -75,10 +76,10 @@ int CarMain() {
 		
 		if (kbhit()) // 키 입력여부 확인 있으면 1,없으면 0 
 		{
-			ch = getch();
+			ch = _getch();
 			if (ch == 0xE0 || ch == 0)
 			{
-				ch = getch();
+				ch = _getch();
 
 				switch (ch)
 				{

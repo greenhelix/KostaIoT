@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#pragma warning(disable: 4996)
 
 class Human
 {
@@ -43,4 +44,5 @@ int heritMain() {
 	Student han("±èÇÑ°á", 14, 12345);
 	han.intro();
 	han.study();
+	return 0;
 }
