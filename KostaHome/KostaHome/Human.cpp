@@ -44,7 +44,7 @@ public:
 	}
 };
 
-int main() {
+int Humanmain() {
 	//SetConsoleDisplayMode(GetStdHandle(STD_OUTPUT_HANDLE), CONSOLE_FULLSCREEN_MODE, 0);
 	::SendMessage(::GetConsoleWindow(), WM_SYSKEYDOWN, VK_RETURN, 0x20000000); //콘솔창 전체화면
 	Human kim("김익환", 31);
