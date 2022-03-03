@@ -21,3 +21,12 @@
 [👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step9_pointer.c)
 19. 이중포인터 
 [👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step10_double_pointer.c)
+
+### C++언어 공부
+1. C언어의 확장 
+2. 클래스
+3. 생성자
+4. 캡슐화
+5. 연산자 오버로딩
+6. 상속
+7. 다형성
