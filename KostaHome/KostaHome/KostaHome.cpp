@@ -5,17 +5,17 @@
 
 void OutToday(Date& d, Time& t);
 
-int main()
-{
-    std::cout << "Hello World!\n";
-	Date d(2018, 06, 29);
-	Time t(12, 34, 56);
-	OutToday(d, t);
-
-	Simple A(1), B(2);
-	A.OutValue();
-	B.OutValue();
-}
+//int main()
+//{
+//    std::cout << "Hello World!\n";
+//	Date d(2018, 06, 29);
+//	Time t(12, 34, 56);
+//	OutToday(d, t);
+//
+//	Simple A(1), B(2);
+//	A.OutValue();
+//	B.OutValue();
+//}
 
 void OutToday(Date& d, Time& t)
 {
