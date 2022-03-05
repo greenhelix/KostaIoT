@@ -142,9 +142,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="FreeGL.cpp" />
+    <ClCompile Include="PlayGame.cpp" />
+    <ClCompile Include="ZodiacSigns.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Users\dlrgh\Desktop\cursor.h" />
+    <ClInclude Include="cursor.h" />
+    <ClInclude Include="PlayGame.h" />
+    <ClInclude Include="ZodiacSigns.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
