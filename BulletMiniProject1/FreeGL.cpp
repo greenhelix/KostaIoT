@@ -1,9 +1,10 @@
 #include "GL/glut.h"
 #include <windows.h>
 #include <stdio.h>
-using namespace std;
 #include <iostream>
 #include "ZodiacSigns.h"
+using namespace std;
+
 
 float mx = 0, my = 0;
 
@@ -159,6 +160,46 @@ void mouse(int button, int state, int x, int y) {
 	}
 }
 
+
+void renderScene(void) {
+
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	//I like to use glm because glu is deprecated
+	//glm::mat4 orth= glm::ortho(0.0f, (float)win_width, 0.0f, (float)win_height);
+	//glMultMatrixf(&(orth[0][0]));
+	gluOrtho2D(0.0, 1000, 0.0, 900);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+	glColor3f(1.0f, 0.0f, 0.0f);//needs to be called before RasterPos
+	glRasterPos2i(50, 50);
+	std::string s = "HELLO IK HWAN";
+	void* font = GLUT_BITMAP_9_BY_15;
+
+	for (std::string::iterator i = s.begin(); i != s.end(); ++i)
+	{
+		char c = *i;
+		//this does nothing, color is fixed for Bitmaps when calling glRasterPos
+		//glColor3f(1.0, 0.0, 1.0); 
+		glutBitmapCharacter(font, c);
+	}
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glEnable(GL_TEXTURE_2D);
+
+	glutSwapBuffers();
+	glutPostRedisplay();
+}
+
+
+
+
+
+
 int main(int argc, char** argv) {
 
 	glutInit(&argc, argv);          
@@ -171,6 +212,9 @@ int main(int argc, char** argv) {
 
 	glutSpecialFunc(moving);
 	glutMouseFunc(mouse);
+
+	// register callbacks
+	glutDisplayFunc(renderScene);
 
 	glutMainLoop();
 

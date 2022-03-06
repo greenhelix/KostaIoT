@@ -5,10 +5,10 @@ void ZodiacSigns::DrawSigns() {
 
 	glBegin(GL_POINTS);
 
-	//Yellow
+	// Yellow
 	glColor3f(1.0, 1.0, 0.0); 
 
-	// È²µµ 12±Ã 
+	// capricorn 
 	float capricorn[11][2] =
 	{
 		{ 0.0, 0.5 },
