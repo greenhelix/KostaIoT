@@ -122,6 +122,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>./lib/x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,12 +142,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DrawGL.cpp" />
+    <ClCompile Include="DrawView.cpp" />
     <ClCompile Include="FreeGL.cpp" />
-    <ClCompile Include="PlayGame.cpp" />
+    <ClCompile Include="OperateGL.cpp" />
+    <ClCompile Include="test2.cpp" />
     <ClCompile Include="ZodiacSigns.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cursor.h" />
+    <ClInclude Include="DrawGL.h" />
+    <ClInclude Include="DrawView.h" />
+    <ClInclude Include="OperateGL.h" />
     <ClInclude Include="PlayGame.h" />
     <ClInclude Include="ZodiacSigns.h" />
   </ItemGroup>
