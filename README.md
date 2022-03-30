@@ -1,4 +1,4 @@
-# KOSTA - IoT양성과정 
+# KOSTA - IoT 입베디드 개발자 양성과정 
 
 ### 1. C study
 > [👉바로가기](https://github.com/greenhelix/KostaIoT/tree/master/kosta_c_study/kostaCStudy)
