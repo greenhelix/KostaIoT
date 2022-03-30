@@ -147,15 +147,12 @@
     <ClCompile Include="FreeGL.cpp" />
     <ClCompile Include="OperateGL.cpp" />
     <ClCompile Include="test2.cpp" />
-    <ClCompile Include="ZodiacSigns.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cursor.h" />
     <ClInclude Include="DrawGL.h" />
     <ClInclude Include="DrawView.h" />
     <ClInclude Include="OperateGL.h" />
-    <ClInclude Include="PlayGame.h" />
-    <ClInclude Include="ZodiacSigns.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

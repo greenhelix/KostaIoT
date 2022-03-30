@@ -34,7 +34,6 @@ float transf_y = -0.47;
 
 DrawGL gl;
 OperateGL os;
-
 //// 초기화면 설정
 //void initialization(int argc, char** argv)
 //{
@@ -107,9 +106,13 @@ void mouse_move(int pointX, int pointY)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glColor3f(0.9f, 0.0f, 0.0f);
+
     glScalef(scale_x, scale_y, 0);
+
     glTranslatef(transf_x, transf_y, 0);
+
     glTranslatef(minDistanceX, minDistanceY, 0);
+
     glutSolidCube(0.02f);
 
     glPopMatrix();
@@ -139,31 +142,7 @@ void click(int A, int B, int px, int py)
                 mat[position_y][position_x][2] = 2;
                 Turn = 0;
             }
-            vector<vector<int>> data(15, vector<int>(15, 0));
-
-            puts("==================stone=======================");
-            for (int y = 0; y < 15; y++)
-            {
-                vector<int> temp(15);
-                for (int x = 0; x < 15; x++)
-                {
-                    cout << mat[y][x][2] << ", ";
-                    temp.push_back(mat[y][x][2]);
-                }
-
-                data.push_back(temp);
-                temp.clear();
-                puts("");
-            }
-
-           /* puts("==================vector=======================");
-
-            for (int i = 0; i < data.size(); i++) {
-                for (int j = 0; j < data[i].size(); j++)
-                    cout << data[i][j] << " ";
-                cout << endl;
-            }
-            puts("++++++++++++++++++++++++++++++++++++++++++++++++");*/
+           
         }
 }
 
@@ -174,6 +153,7 @@ void keyboard(unsigned char key, int x, int y)
 }
 
 void display() {
+
     glClear(GL_COLOR_BUFFER_BIT);
 
     // 기본 마우스 이동시 적용될 함수.
@@ -193,7 +173,6 @@ void display() {
     //view.DrawStoneOnBoard(mat);
     gl.glDrawStone(mat);
 
-
     // 화면에 띄운다.
     glFlush();
 }
@@ -211,7 +190,6 @@ int main(int argc, char** argv)
         os.resetGame(mat);
     }
 
-    puts("display 시작");
     glutDisplayFunc(display);
 
     glutMainLoop();
