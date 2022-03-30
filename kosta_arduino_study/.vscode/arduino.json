@@ -1,0 +1,5 @@
+{
+    "board": "arduino:avr:uno",
+    "port": "COM8",
+    "sketch": "magic_light_cup_module.ino"
+}
