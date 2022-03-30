@@ -1,32 +1,20 @@
 # KOSTA - IoT양성과정 
 
-### C언어 공부
-1. 변수 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step1_variable.c)
-3. 연산자 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step2_operator.c)
-5. 조건문 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step3_if.c)
-7. 반복문 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step4_for.c)
-9. 함수 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step5_fun.c)
-11. 전처리기 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step6_macro.c)
-13. 표준함수 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step7_standardFun.c)
-15. 배열 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step8_array.c)
-17. 포인터 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step9_pointer.c)
-19. 이중포인터 
-[👉예제](https://github.com/greenhelix/KostaIoT/blob/master/kostaCStudy/kostaCStudy/step10_double_pointer.c)
+### 1. C study
+> [👉바로가기](https://github.com/greenhelix/KostaIoT/tree/master/kosta_c_study/kostaCStudy)
+### 2. C++ study
+> [👉바로가기](https://github.com/greenhelix/KostaIoT/tree/master/kosta_cpp_study)
+### 3. Arduino study
+> [👉바로가기]()
+### 4. Raspiberry study
+> [👉바로가기]()
+----
 
-### C++언어 공부
-1. C언어의 확장 
-2. 클래스
-3. 생성자
-4. 캡슐화
-5. 연산자 오버로딩
-6. 상속
-7. 다형성
+### 프로젝트 
+
+#### 미니프로젝트 1 - 오목만들기
+> [👉프로젝트 설명](https://www.notion.so/hiawath/1-0ea798ddd77c4f4db6e0215b8ae83418) \
+> [👉코드 보러가기](https://github.com/didoidle/cpp_go_pj/tree/Bullet_IK)
+#### 미니프로젝트 2 
+
+#### 파이널프로젝트 
