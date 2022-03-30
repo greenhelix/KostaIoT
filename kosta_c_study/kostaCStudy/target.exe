@@ -1,0 +1,7 @@
+#include <stdio.h>
+
+int target(void)
+{
+    printf("여기는 게임입니다.\n");
+    return 3;
+}
