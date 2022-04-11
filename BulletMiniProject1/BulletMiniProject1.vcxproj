@@ -143,11 +143,14 @@
   <ItemGroup>
     <ClCompile Include="FreeGL.cpp" />
     <ClCompile Include="PlayGame.cpp" />
+    <ClCompile Include="tryTest1.cpp" />
+    <ClCompile Include="View.cpp" />
     <ClCompile Include="ZodiacSigns.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cursor.h" />
     <ClInclude Include="PlayGame.h" />
+    <ClInclude Include="View.h" />
     <ClInclude Include="ZodiacSigns.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
