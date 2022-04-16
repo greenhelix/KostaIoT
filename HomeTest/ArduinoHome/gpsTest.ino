@@ -1,6 +1,5 @@
-# 1 "c:\\GitHub\\KostaIoT\\HomeTest\\ArduinoHome\\gpsTest.ino"
-# 2 "c:\\GitHub\\KostaIoT\\HomeTest\\ArduinoHome\\gpsTest.ino" 2
-# 3 "c:\\GitHub\\KostaIoT\\HomeTest\\ArduinoHome\\gpsTest.ino" 2
+#include <SoftwareSerial.h>
+#include <TinyGPS.h>
 
 TinyGPS gps;
 SoftwareSerial uart_gps(6, 5);
@@ -20,7 +19,7 @@ void loop()
     while (uart_gps.available()) // While there is data on the RX pin…
     {
         int c = uart_gps.read(); // load the data into a variable…
-        if (gps.encode(c)) // if there is a new valid sentence…
+        if (gps.encode(c))       // if there is a new valid sentence…
         {
             getgps(gps); // then grab the data.
         }

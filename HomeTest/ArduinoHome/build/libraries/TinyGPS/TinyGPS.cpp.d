@@ -1,5 +1,6 @@
-c:\GitHub\KostaIoT\HomeTest\ArduinoHome\build\sketch\app.ino.cpp.o: \
- c:\GitHub\KostaIoT\HomeTest\ArduinoHome\build\sketch\app.ino.cpp \
+c:\GitHub\KostaIoT\HomeTest\ArduinoHome\build\libraries\TinyGPS\TinyGPS.cpp.o: \
+ C:\Users\dlrgh\Documents\Arduino\libraries\TinyGPS\src\TinyGPS.cpp \
+ C:\Users\dlrgh\Documents\Arduino\libraries\TinyGPS\src\TinyGPS.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/binary.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\arduino\avr\cores\arduino/WCharacter.h \
