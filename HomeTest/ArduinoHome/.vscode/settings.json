@@ -1,6 +1,6 @@
 {
   "C_Cpp_Runner.cCompilerPath": "C:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gcc.exe",
-  "C_Cpp_Runner.cppCompilerPath": "C:/Program Files (x86)/Arduino/hardware/tools/avr/bin/avr-g++",
+  "C_Cpp_Runner.cppCompilerPath": "C:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/g++.exe",
   "C_Cpp_Runner.debuggerPath": "C:/ProgramData/chocolatey/lib/mingw/tools/install/mingw64/bin/gdb.exe",
   "C_Cpp_Runner.cStandard": "c11",
   "C_Cpp_Runner.cppStandard": "c++11",
@@ -44,5 +44,6 @@
     "**/.*/**",
     "**/.vscode",
     "**/.vscode/**"
-  ]
+  ],
+  "C_Cpp.errorSquiggles": "Disabled"
 }
