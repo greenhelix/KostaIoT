@@ -387,3 +387,4 @@ kostaCStudy/kostaCStudy/kostaCStudy.vcxproj.filters
 /KostaHome/KostaHome/KostaHome.rc
 /KostaHome/KostaHome/resource.h
 /BulletMiniProject1/.vs/BulletMiniProject1/v17
+KostaHome/KostaHome/win_tcp_client_test.cpp
