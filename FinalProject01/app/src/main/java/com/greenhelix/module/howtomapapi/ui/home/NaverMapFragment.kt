@@ -1,6 +1,5 @@
 package com.greenhelix.module.howtomapapi.ui.home
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -12,8 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.greenhelix.module.howtomapapi.R
+import com.greenhelix.module.howtomapapi.databinding.AdapterCardBinding
 import com.greenhelix.module.howtomapapi.databinding.FragmentNaverMapBinding
-import com.greenhelix.module.howtomapapi.databinding.TestCardBinding
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.CameraPosition
 import com.naver.maps.map.MapFragment
@@ -31,8 +30,6 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentNaverMapBinding? = null
     private val binding get() = _binding!!
     private lateinit var locationSource: FusedLocationSource
-    private var _cardBinding : TestCardBinding? = null
-    private val cardBinding get() = _cardBinding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,37 +81,44 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-
     override fun onMapReady(naverMap: NaverMap) {
         Log.d("ik", "mapOptions")
+
         val infoWindow = InfoWindow()
 
-        infoWindow.adapter = object : InfoWindow.DefaultTextAdapter(requireContext()){
-            override fun getText(info: InfoWindow): CharSequence {
-                return "정보창 내용"
-            }
-        }
-        val customWindow = InfoWindow()
-        customWindow.adapter = object : InfoWindow.DefaultViewAdapter(requireContext()){
-            override fun getContentView(info: InfoWindow): View {
-
-                return cardBinding.cardInfoSample
-            }
-        }
-
         val listener = Overlay.OnClickListener { overlay ->
+
             val marker = overlay as Marker
 
             if (marker.infoWindow == null) {
-                // 현재 마커에 정보 창이 열려있지 않을 경우 엶
+
                 infoWindow.open(marker)
+
             } else {
-                // 이미 현재 마커에 정보 창이 열려있을 경우 닫음
+
                 infoWindow.close()
+            }
+
+            val info = overlay as InfoWindow
+
+            if(info.adapter.equals()){
+
             }
 
             true
         }
+
+        infoWindow.adapter = object : InfoWindow.DefaultViewAdapter(requireContext()) {
+            override fun getContentView(window: InfoWindow): View {
+                Log.d("Ik", "getcontentVIEW")
+
+                return View.inflate(requireContext(), R.layout.adapter_card, null)
+            }
+
+
+
+        }
+
 
         naverMap.locationSource = locationSource
 
