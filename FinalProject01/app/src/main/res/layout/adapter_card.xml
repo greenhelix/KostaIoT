@@ -1,63 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_info_sample"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/view_linear_expand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <ProgressBar
+            android:id="@+id/show_data_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/view_linear"
-            android:orientation="horizontal"
-            android:animateLayoutChanges="true"
-            >
+            android:layout_marginStart="5sp"
+            android:layout_marginEnd="5sp"
+            android:layout_marginTop="20sp"
+            android:progress="0"
+            android:max="100"
+            android:progressDrawable="@drawable/custom_progressbar"
+            />
 
-            <View
-                android:id="@+id/view_man"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:background="@android:color/holo_blue_light" />
-
-            <View
-                android:id="@+id/view_woman"
-                android:layout_width="50sp"
-                android:layout_height="50sp"
-                android:background="@android:color/holo_red_light" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/view_linear_expand"
-            android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/card_tv_store_name"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            >
-            <TextView
-                android:id="@+id/card_tv_store_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="가게이름"
-                android:textStyle="bold"
-                android:textSize="20sp"
-                />
+            android:text="가게이름"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            />
 
-            <TextView
-                android:id="@+id/card_tv_store_describe"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="가게에 대한 설명 분위기 카운트 등등 \n 다양한 정보를 제공하고 있습니다.\n 별점은 몇점입니다."
-                />
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/card_tv_store_describe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="가게에 대한 설명 분위기 카운트 등등 \n 다양한 정보를 제공하고 있습니다.\n 별점은 몇점입니다."
+            />
 
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>

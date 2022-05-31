@@ -7,8 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.NaverMapFragment">
 
-    <fragment
-        android:id="@+id/map_naver_frag"
+    <com.naver.maps.map.MapView
+        android:id="@+id/naver_map_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="com.naver.maps.map.MapFragment" />

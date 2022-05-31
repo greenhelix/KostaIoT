@@ -33,9 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
+        val navController = findNavController(R.id.fragment_holder)
         val appBarConfiguration = AppBarConfiguration(
             setOf(
                 R.id.navigation_naver_map, R.id.navigation_dashboard, R.id.navigation_connect
@@ -43,7 +41,18 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+
     }
+
+//    private fun changeFragment(fragmentToChange: Fragment): Unit{
+//        supportFragmentManager.beginTransaction().apply {
+//            replace(binding.fragmentHolder.id, fragmentToChange)
+//            addToBackStack(null)
+//            commit()
+//        }
+//    }
+
 
     private fun isConnected(): Boolean {
         var result = false

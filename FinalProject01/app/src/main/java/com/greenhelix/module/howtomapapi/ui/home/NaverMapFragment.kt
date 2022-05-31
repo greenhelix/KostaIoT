@@ -1,6 +1,9 @@
 package com.greenhelix.module.howtomapapi.ui.home
 
+import com.greenhelix.module.howtomapapi.R
+import android.content.Context
 import android.graphics.Color
+import android.graphics.PointF
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,25 +13,21 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.greenhelix.module.howtomapapi.R
-import com.greenhelix.module.howtomapapi.databinding.AdapterCardBinding
 import com.greenhelix.module.howtomapapi.databinding.FragmentNaverMapBinding
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
 
-class NaverMapFragment : Fragment(), OnMapReadyCallback {
+
+class NaverMapFragment : Fragment(), OnMapReadyCallback{
 
     private lateinit var mapViewModel: MapViewModel
     private var _binding: FragmentNaverMapBinding? = null
     private val binding get() = _binding!!
+
     private lateinit var locationSource: FusedLocationSource
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,13 +52,12 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         _binding = FragmentNaverMapBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val mapFragment = childFragmentManager.findFragmentById(R.id.map_naver_frag) as MapFragment?
-            ?: MapFragment.newInstance().also {
-            childFragmentManager.beginTransaction().add(R.id.map_naver_frag, this).commit()
-        }
-
         locationSource = FusedLocationSource(this, 1000 )
 
+        val mapFragment = childFragmentManager.findFragmentById(R.id.naver_map_view) as MapFragment?
+            ?: MapFragment.newInstance().also {
+                childFragmentManager.beginTransaction().add(R.id.naver_map_view, it).commit()
+            }
         mapFragment.getMapAsync(this)
 
         return root
@@ -80,45 +78,58 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
             }
         }
     }
+    private class InfoWindowAdapter(private val context: Context) : InfoWindow.ViewAdapter() {
+        private var rootView: View? = null
+
+        override fun getView(infoWindow: InfoWindow): View {
+            val view = rootView ?: View.inflate(context, R.layout.adapter_card, null).also { rootView = it }
+//            val icon = icon ?: view.findViewById<ImageView>(R.id.icon).also { icon = it }
+//            val text = text ?: view.findViewById<TextView>(R.id.text).also { text = it }
+
+            val marker = infoWindow.marker
+//            if (marker != null) {
+//                icon.setImageResource(R.drawable.ic_place_black_24dp)
+//                text.text = marker.tag as String?
+//            } else {
+//                icon.setImageResource(R.drawable.ic_my_location_black_24dp)
+//                text.text = context.getString(
+//                    R.string.format_coord,
+//                    infoWindow.position.latitude,
+//                    infoWindow.position.longitude
+//                )
+//            }
+            return view
+        }
+    }
 
     override fun onMapReady(naverMap: NaverMap) {
         Log.d("ik", "mapOptions")
 
-        val infoWindow = InfoWindow()
-
-        val listener = Overlay.OnClickListener { overlay ->
-
-            val marker = overlay as Marker
-
-            if (marker.infoWindow == null) {
-
-                infoWindow.open(marker)
-
-            } else {
-
-                infoWindow.close()
+        val infoWindow = InfoWindow().apply {
+            anchor = PointF(0f, 1f)
+            offsetX = resources.getDimensionPixelSize(R.dimen.custom_info_window_offset_x)
+            offsetY = resources.getDimensionPixelSize(R.dimen.custom_info_window_offset_y)
+            adapter = InfoWindowAdapter(requireContext())
+            setOnClickListener {
+                close()
+                true
             }
-
-            val info = overlay as InfoWindow
-
-            if(info.adapter.equals()){
-
-            }
-
-            true
         }
 
-        infoWindow.adapter = object : InfoWindow.DefaultViewAdapter(requireContext()) {
-            override fun getContentView(window: InfoWindow): View {
-                Log.d("Ik", "getcontentVIEW")
-
-                return View.inflate(requireContext(), R.layout.adapter_card, null)
-            }
-
-
-
-        }
-
+//        val markerOnClickListener = Overlay.OnClickListener { overlay ->
+//
+//            val marker = overlay as Marker
+//
+//            if (marker.infoWindow == null) {
+//
+//                infoWindow.open(marker)
+//
+//            } else {
+//
+//                infoWindow.close()
+//            }
+//            true
+//        }
 
         naverMap.locationSource = locationSource
 
@@ -131,7 +142,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
         Marker().apply {
             position = LatLng(37.5670135, 126.9783740)
             map = naverMap
-            this.onClickListener = listener
+            setOnClickListener {
+                infoWindow.open(this)
+                true
+            }
         }
 
         Marker().apply {
@@ -139,7 +153,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
             icon = MarkerIcons.BLACK
             angle = 315f
             map = naverMap
-            this.onClickListener = listener
+            setOnClickListener {
+                infoWindow.open(this)
+                true
+            }
         }
 
         Marker().apply {
@@ -148,12 +165,17 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback {
             iconTintColor = Color.RED
             alpha = 0.5f
             map = naverMap
-            this.onClickListener = listener
+            setOnClickListener {
+                infoWindow.open(this)
+                true
+            }
         }
 
-        naverMap.setOnMapClickListener { pointF, latLng ->
+        naverMap.setOnMapClickListener { _, coord ->
+            infoWindow.position = coord
             infoWindow.close()
         }
+
 
     }
 
