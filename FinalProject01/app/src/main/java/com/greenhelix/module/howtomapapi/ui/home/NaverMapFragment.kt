@@ -20,6 +20,7 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
+import java.util.zip.Inflater
 
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback{
@@ -78,41 +79,28 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             }
         }
     }
-    private class InfoWindowAdapter(private val context: Context) : InfoWindow.ViewAdapter() {
-        private var rootView: View? = null
 
-        override fun getView(infoWindow: InfoWindow): View {
-            val view = rootView ?: View.inflate(context, R.layout.adapter_card, null).also { rootView = it }
-//            val icon = icon ?: view.findViewById<ImageView>(R.id.icon).also { icon = it }
-//            val text = text ?: view.findViewById<TextView>(R.id.text).also { text = it }
 
-            val marker = infoWindow.marker
-//            if (marker != null) {
-//                icon.setImageResource(R.drawable.ic_place_black_24dp)
-//                text.text = marker.tag as String?
-//            } else {
-//                icon.setImageResource(R.drawable.ic_my_location_black_24dp)
-//                text.text = context.getString(
-//                    R.string.format_coord,
-//                    infoWindow.position.latitude,
-//                    infoWindow.position.longitude
-//                )
-//            }
-            return view
-        }
-    }
 
     override fun onMapReady(naverMap: NaverMap) {
         Log.d("ik", "mapOptions")
+
+
 
         val infoWindow = InfoWindow().apply {
             anchor = PointF(0f, 1f)
             offsetX = resources.getDimensionPixelSize(R.dimen.custom_info_window_offset_x)
             offsetY = resources.getDimensionPixelSize(R.dimen.custom_info_window_offset_y)
-            adapter = InfoWindowAdapter(requireContext())
             setOnClickListener {
                 close()
                 true
+            }
+        }
+
+        infoWindow.adapter = object : InfoWindow.ViewAdapter() {
+            override fun getView(info: InfoWindow): View {
+
+                return view
             }
         }
 
