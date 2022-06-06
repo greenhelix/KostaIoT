@@ -1,7 +1,7 @@
 package com.greenhelix.module.howtomapapi.ui.home
 
-import com.greenhelix.module.howtomapapi.R
 import android.content.Context
+import com.greenhelix.module.howtomapapi.R
 import android.graphics.Color
 import android.graphics.PointF
 import android.os.Build
@@ -10,6 +10,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,7 +22,6 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
-import java.util.zip.Inflater
 
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback{
@@ -80,7 +81,32 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
         }
     }
 
+    private class InfoWindowAdapter(private val context: Context) : InfoWindow.ViewAdapter(){
+        private var rootView : View? = null
+        override fun getView(info: InfoWindow): View {
+            val view = rootView ?: View.inflate(context, R.layout.window_info_custom, null).also { rootView = it }
+            val progress = view.findViewById<ProgressBar>(R.id.show_data_progress)
 
+            val text1 = view.findViewById<TextView>(R.id.card_tv_store_name)
+            val text2 = view.findViewById<TextView>(R.id.card_tv_store_describe)
+            val marker = info.marker
+
+            if(marker != null){
+
+                progress.progress = 40
+
+                text1.text = "김익환 카페"
+                text2.text = "여기는 가게 설명 샘플입니다. \n카페입니다. 여기는"
+
+            }else{
+                progress.progress = 0
+                text1.text = "no 카페"
+                text2.text = "여기는 no sample입니다. \n where am i?"
+
+            }
+            return view
+        }
+    }
 
     override fun onMapReady(naverMap: NaverMap) {
         Log.d("ik", "mapOptions")
@@ -96,28 +122,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
                 true
             }
         }
-
-        infoWindow.adapter = object : InfoWindow.ViewAdapter() {
-            override fun getView(info: InfoWindow): View {
-
-                return view
-            }
-        }
-
-//        val markerOnClickListener = Overlay.OnClickListener { overlay ->
-//
-//            val marker = overlay as Marker
-//
-//            if (marker.infoWindow == null) {
-//
-//                infoWindow.open(marker)
-//
-//            } else {
-//
-//                infoWindow.close()
-//            }
-//            true
-//        }
+        infoWindow.anchor = PointF(1f, 1f)
 
         naverMap.locationSource = locationSource
 
@@ -132,6 +137,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             map = naverMap
             setOnClickListener {
                 infoWindow.open(this)
+                infoWindow.adapter = InfoWindowAdapter(requireContext())
                 true
             }
         }
@@ -143,8 +149,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             map = naverMap
             setOnClickListener {
                 infoWindow.open(this)
+                infoWindow.adapter = InfoWindowAdapter(requireContext())
                 true
             }
+
         }
 
         Marker().apply {
@@ -155,12 +163,13 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             map = naverMap
             setOnClickListener {
                 infoWindow.open(this)
+                infoWindow.adapter = InfoWindowAdapter(requireContext())
                 true
             }
         }
 
-        naverMap.setOnMapClickListener { _, coord ->
-            infoWindow.position = coord
+        naverMap.setOnMapClickListener { _, cord ->
+            infoWindow.position = cord
             infoWindow.close()
         }
 

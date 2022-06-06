@@ -7,6 +7,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/pin_shape"
     >
 
     <LinearLayout
@@ -15,26 +16,18 @@
         android:orientation="horizontal">
 
         <ProgressBar
-            android:id="@+id/show_data1_progress"
+            android:id="@+id/show_data_progress"
             style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
+            android:layout_width="120sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="5sp"
             android:layout_marginTop="20sp"
             android:progress="0"
             android:max="100"
-            android:progressDrawable="@drawable/custom_progressbar"
+            android:progressDrawable="@drawable/progressbar_style"
             />
-        <ProgressBar
-            android:id="@+id/show_data2_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20sp"
-            android:progress="0"
-            android:max="100"
-            android:progressDrawable="@drawable/custom_progressbar"
-            />
+
+
     </LinearLayout>
     <TextView
         android:id="@+id/card_tv_store_name"
