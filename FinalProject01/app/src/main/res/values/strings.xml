@@ -24,4 +24,6 @@
     <string name="topic_text">Topic</string>
     <string name="message_text">Message</string>
     <string name="format_coord">(%1$.5f, %2$.5f)</string>
+    <string name="except_noDataAlert">정보가 없습니다!</string>
+    <string name="except_noDescribeAlert">정보가 없습니다...</string>
 </resources>

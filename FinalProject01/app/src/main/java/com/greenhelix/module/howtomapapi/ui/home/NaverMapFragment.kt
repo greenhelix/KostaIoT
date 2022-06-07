@@ -32,10 +32,24 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
     private val binding get() = _binding!!
     private var contain : ViewGroup? = null
     private lateinit var locationSource: FusedLocationSource
+    private val permissionRequest = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()){ permission ->
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            when {
+                permission.getOrDefault(android.Manifest.permission.ACCESS_FINE_LOCATION, false) ->{
+                    Log.d("Ik", "위치정보 허용")
+                }
+                permission.getOrDefault(android.Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
+                    Log.d("Ik", "위치정보 허용")
+                } else -> {
+                Log.d("Ik", "위치정보 허용 거부")
+            }
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("Ik", "Fragment onCreate")
 
         // 사용자 위치 권한 허용 여부 확인
         Log.d("Ik", "위치정보 허용 권한 묻기")
@@ -45,43 +59,21 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        Log.d("Ik", "Fragment onCreateView")
-        mapViewModel =
-            ViewModelProvider(
-                this,
-                ViewModelProvider.NewInstanceFactory()
-            )[MapViewModel::class.java]
 
+        mapViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MapViewModel::class.java]
         _binding = FragmentNaverMapBinding.inflate(inflater, container, false)
-        val root: View = binding.root
         contain = container
         locationSource = FusedLocationSource(this, 1000 )
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.naver_map_view) as MapFragment?
-            ?: MapFragment.newInstance().also {
-                childFragmentManager.beginTransaction().add(R.id.naver_map_view, it).commit()
-            }
+            ?: MapFragment.newInstance().also { childFragmentManager.beginTransaction().add(R.id.naver_map_view, it).commit() }
+
         mapFragment.getMapAsync(this)
 
-        return root
+        return binding.root
     }
 
-    private val permissionRequest = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()){ permission ->
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            when {
-                permission.getOrDefault(android.Manifest.permission.ACCESS_FINE_LOCATION, false) ->{
-                    Log.d("Ik", "위치정보 허용")
-                }
-                permission.getOrDefault(android.Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    Log.d("Ik", "위치정보 허용")
-                } else -> {
-                    Log.d("Ik", "위치정보 허용 거부")
-                }
-            }
-        }
-    }
-
+    // 네이버 지도 정보창 커스텀 뷰 적용하기 위한 View adapter 설정 내부 클래스
     private inner class InfoWindowAdapter(private val context: Context) : InfoWindow.ViewAdapter(){
         var adapterBinding : WindowInfoCustomBinding? = null
         private val cardBinding get() = adapterBinding
@@ -93,20 +85,25 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             val text2 = cardBinding?.cardTvStoreDescribe
             val marker = info.marker
 
-            // 뷰바인딩 적용 안했을 때 뷰를 가져오는 방법
+//            //뷰바인딩 적용 안했을 때 뷰를 가져오는 방법
 //            val view = View.inflate(context, R.layout.window_info_custom, null)
 //            val view = rootView ?: View.inflate(context, R.layout.window_info_custom, null).also { rootView = it }
 //            val text1 = view.findViewById<TextView>(R.id.card_tv_store_name)
-//            val text2 = view.findViewById<TextView>(R.id.card_tv_store_describe)
 
             if(marker != null){
                 progress!!.progress = 40
-                text1!!.text = "김익환 카페"
-                text2!!.text = "여기는 가게 설명 샘플입니다. \n카페입니다. 여기는"
-            }else{
+                mapViewModel.stName.observe(viewLifecycleOwner, {
+                    text1!!.text = it
+                })
+                mapViewModel.stDesc.observe(viewLifecycleOwner, {
+                    text2!!.text = it
+                })
+            }
+            else
+            {
                 progress!!.progress = 0
-                text1!!.text = "no 카페"
-                text2!!.text = "여기는 NoSample 입니다. \n where am i?"
+                text1!!.text = getString(R.string.except_noDataAlert)
+                text2!!.text = getString(R.string.except_noDescribeAlert)
             }
 
             return cardBinding!!.root
@@ -115,7 +112,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
 
     override fun onMapReady(naverMap: NaverMap) {
         Log.d("ik", "mapOptions")
-
+        val locate = locationSource
         val infoWindow = InfoWindow().apply {
             setOnClickListener {
                 close()
@@ -124,7 +121,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
         }
 
         naverMap.apply {
-            locationSource
+            locationSource = locate
             cameraPosition = CameraPosition(NaverMap.DEFAULT_CAMERA_POSITION.target, NaverMap.DEFAULT_CAMERA_POSITION.zoom, 37.0, 45.0)
             uiSettings.isCompassEnabled = true
             uiSettings.isLocationButtonEnabled = true
@@ -134,55 +131,47 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             }
         }
 
-//        naverMap.locationSource = locationSource
-//
-//        naverMap.cameraPosition = CameraPosition(NaverMap.DEFAULT_CAMERA_POSITION.target, NaverMap.DEFAULT_CAMERA_POSITION.zoom, 37.0, 45.0)
-//
-//        naverMap.uiSettings.isCompassEnabled = true
-//
-//        naverMap.uiSettings.isLocationButtonEnabled = true
-
-        Marker().apply {
-            position = LatLng(37.5670135, 126.9783740)
-            map = naverMap
-            setOnClickListener {
+        arrayOf(
+            Marker().apply{
+                position = LatLng(37.5670135, 126.9783740)
+                map = naverMap
+                setOnClickListener {
                 infoWindow.open(this)
                 infoWindow.adapter = InfoWindowAdapter(requireContext())
                 true
+                }
+            },
+            Marker().apply {
+                position = LatLng(37.57000, 126.97618)
+                icon = MarkerIcons.BLACK
+                map = naverMap
+                setOnClickListener {
+                    infoWindow.open(this)
+                    infoWindow.adapter = InfoWindowAdapter(requireContext())
+                    true
+                }
+            },
+            Marker().apply {
+                position = LatLng(37.56500, 126.9783881)
+                icon = MarkerIcons.BLACK
+                iconTintColor = Color.RED
+                map = naverMap
+                setOnClickListener {
+                    infoWindow.open(this)
+                    infoWindow.adapter = InfoWindowAdapter(requireContext())
+                    true
+                }
             }
-        }
-
-        Marker().apply {
-            position = LatLng(37.57000, 126.97618)
-            icon = MarkerIcons.BLACK
-            angle = 315f
-            map = naverMap
-            setOnClickListener {
-                infoWindow.open(this)
-                infoWindow.adapter = InfoWindowAdapter(requireContext())
-                true
-            }
-
-        }
-
-        Marker().apply {
-            position = LatLng(37.56500, 126.9783881)
-            icon = MarkerIcons.BLACK
-            iconTintColor = Color.RED
-            alpha = 0.5f
-            map = naverMap
-            setOnClickListener {
-                infoWindow!!.open(this)
-                infoWindow!!.adapter = InfoWindowAdapter(requireContext())
-                true
-            }
-        }
-
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        // fragment class 의 뷰 바인딩 해제 시키기
         _binding = null
+
+        // inner class 부분에서 뷰 바인딩 해제 시키기 위한 방법
         InfoWindowAdapter(requireContext()).adapterBinding = null
     }
 }

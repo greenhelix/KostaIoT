@@ -13,11 +13,11 @@
         android:layout_height="match_parent"
         android:name="com.naver.maps.map.MapFragment" />
 
-    <com.naver.maps.map.widget.LocationButtonView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/map_naver_my_location"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
+<!--    <com.naver.maps.map.widget.LocationButtonView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:id="@+id/map_naver_my_location"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        />-->
 </androidx.constraintlayout.widget.ConstraintLayout>
