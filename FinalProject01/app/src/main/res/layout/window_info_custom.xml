@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout
-    android:id="@+id/view_linear_expand"
+    android:id="@+id/info_linear"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/pin_shape"
+    android:background="@drawable/navermap_default_info_window_background"
     >
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <TextView
+        android:id="@+id/card_tv_title"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:text="남자가 더 많아요.."
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        />
 
-        <ProgressBar
-            android:id="@+id/show_data_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="120sp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5sp"
-            android:layout_marginTop="20sp"
-            android:progress="0"
-            android:max="100"
-            android:progressDrawable="@drawable/progressbar_style"
-            />
-
-
-    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/show_data_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10sp"
+        android:progress="50"
+        android:max="100"
+        android:progressDrawable="@drawable/progressbar_style"
+        />
     <TextView
         android:id="@+id/card_tv_store_name"
-        android:layout_width="match_parent"
+        android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:text="가게이름"
         android:textStyle="bold"
