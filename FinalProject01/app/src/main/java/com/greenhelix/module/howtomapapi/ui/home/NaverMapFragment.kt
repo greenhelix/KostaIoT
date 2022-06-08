@@ -8,9 +8,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.greenhelix.module.howtomapapi.R
 import com.greenhelix.module.howtomapapi.databinding.FragmentNaverMapBinding
 import com.greenhelix.module.howtomapapi.databinding.WindowInfoCustomBinding
@@ -23,6 +25,8 @@ import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import com.naver.maps.map.util.MarkerIcons
+import org.eclipse.paho.client.mqttv3.IMqttActionListener
+import org.eclipse.paho.client.mqttv3.IMqttToken
 
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback{
@@ -64,6 +68,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
         _binding = FragmentNaverMapBinding.inflate(inflater, container, false)
         contain = container
         locationSource = FusedLocationSource(this, 1000 )
+
+        // 통신 테스트
+        mapViewModel.connectMQTT(requireContext())
+        mapViewModel.parseData()
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.naver_map_view) as MapFragment?
             ?: MapFragment.newInstance().also { childFragmentManager.beginTransaction().add(R.id.naver_map_view, it).commit() }
@@ -125,6 +133,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             cameraPosition = CameraPosition(NaverMap.DEFAULT_CAMERA_POSITION.target, NaverMap.DEFAULT_CAMERA_POSITION.zoom, 37.0, 45.0)
             uiSettings.isCompassEnabled = true
             uiSettings.isLocationButtonEnabled = true
+            buildingHeight = 1.5f
             setOnMapClickListener { _, latLng ->
                 infoWindow.position = latLng
                 infoWindow.close()
@@ -173,5 +182,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
 
         // inner class 부분에서 뷰 바인딩 해제 시키기 위한 방법
         InfoWindowAdapter(requireContext()).adapterBinding = null
+
+        mapViewModel.disconnectMQTT()
     }
 }

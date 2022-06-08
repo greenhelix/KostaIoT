@@ -1,20 +1,15 @@
 package com.greenhelix.module.howtomapapi.ui.network
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.greenhelix.module.howtomapapi.R
 import com.greenhelix.module.howtomapapi.databinding.FragmentConnectBinding
-import com.greenhelix.module.howtomapapi.databinding.FragmentNaverMapBinding
 import com.greenhelix.module.howtomapapi.network.*
-import com.greenhelix.module.howtomapapi.ui.home.MapViewModel
 
 class ConnectFragment : Fragment() {
 

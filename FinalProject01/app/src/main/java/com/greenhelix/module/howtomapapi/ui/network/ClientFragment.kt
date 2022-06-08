@@ -46,7 +46,8 @@ class ClientFragment : Fragment() {
         val pwd         = arguments?.getString(MQTT_PWD_KEY)
 
         // Check if passed arguments are valid
-        if (    serverURI   != null    &&
+        if (
+            serverURI   != null    &&
             clientId    != null    &&
             username    != null    &&
             pwd         != null        ) {
@@ -54,8 +55,7 @@ class ClientFragment : Fragment() {
             mqttClient = MQTTClient(context, serverURI, clientId)
 
             // Connect and login to MQTT Broker
-            mqttClient.connect( username,
-                pwd,
+            mqttClient.connect( username, pwd,
                 object : IMqttActionListener {
                     override fun onSuccess(asyncActionToken: IMqttToken?) {
                         Log.d(this.javaClass.name, "Connection success")
