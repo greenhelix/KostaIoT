@@ -3,8 +3,6 @@ package com.greenhelix.module.howtomapapi.model
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
-import com.greenhelix.module.howtomapapi.R
 import com.greenhelix.module.howtomapapi.network.MQTTClient
 import org.eclipse.paho.client.mqttv3.*
 
@@ -51,20 +49,21 @@ class DAO {
         return mqttClient
     }
 
-    fun subscribeDB() : String {
+    fun subscribeDB(table : String) : String {
         var subscribeData = ""
         if(mqttClient.isConnected()){
-            val topic = "kosta_app"
-            mqttClient.subscribe(topic, 1,
+            mqttClient.subscribe(
+                table, 1,
                 object : IMqttActionListener {
                     override fun onSuccess(asyncActionToken: IMqttToken?) {
-                        val msg = "Subscribed to: $topic"
-                        Log.d(this.javaClass.name, "Success to subscribe: $topic")
+                        val msg = "Subscribed to: $table"
+                        Log.d(this.javaClass.name, "Success to subscribe: $table")
                         Log.d(this.javaClass.name, msg)
                         subscribeData = msg
                     }
+
                     override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-                        Log.d(this.javaClass.name, "Failed to subscribe: $topic")
+                        Log.d(this.javaClass.name, "Failed to subscribe: $table")
                     }
                 })
         } else {
