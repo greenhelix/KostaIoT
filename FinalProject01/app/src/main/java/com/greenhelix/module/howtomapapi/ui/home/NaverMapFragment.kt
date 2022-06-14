@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,10 +15,7 @@ import com.greenhelix.module.howtomapapi.R
 import com.greenhelix.module.howtomapapi.databinding.FragmentNaverMapBinding
 import com.greenhelix.module.howtomapapi.databinding.WindowInfoCustomBinding
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraPosition
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
+import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
@@ -25,6 +23,7 @@ import com.naver.maps.map.util.FusedLocationSource
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback{
 
+//    private lateinit var
     private lateinit var mapViewModel: MapViewModel
     private var _binding: FragmentNaverMapBinding? = null
     private val binding get() = _binding!!
@@ -64,8 +63,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
         locationSource = FusedLocationSource(this, 1000 )
 
         // 통신 테스트
-        mapViewModel.connectMQTT(requireContext())
-        mapViewModel.parsePosData()
+        mapViewModel.conMQTT(requireContext())
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.naver_map_view) as MapFragment?
             ?: MapFragment.newInstance().also { childFragmentManager.beginTransaction().add(R.id.naver_map_view, it).commit() }
@@ -125,9 +123,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
     }
 
     override fun onMapReady(naverMap: NaverMap) {
-
-        Log.d("ik", "mapOptions")
-
+        Log.d("ik", "onMapReady")
         val locate = locationSource
         val infoWindow = InfoWindow().apply {
             setOnClickListener {
@@ -135,7 +131,6 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
                 true
             }
         }
-
         naverMap.apply {
             locationSource = locate
             cameraPosition = CameraPosition(
@@ -151,30 +146,41 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
                 infoWindow.position = latLng
                 infoWindow.close()
             }
+            moveCamera(CameraUpdate.scrollTo(LatLng(37.5139, 126.8926)))  // 문래역 쪽 카메라 위치
+
+
         }
 
-        createMarkers(naverMap, infoWindow).forEach {
-            getMarkerInfo(it, infoWindow)
-        } // 좌표 마커만 생성
-    }
-
-    private fun createMarkers(nMap: NaverMap, info: InfoWindow) : List<Marker>{
-        var i = 0
-        val posZip = mapViewModel.parsePosData()
-        val showMarker = mutableListOf<Marker>()
-        while( i < posZip.size ){
-//            showMarker[i] =
-            Marker().apply {
-                map = nMap
-                val coordinate= posZip[i].pos.split(",")
-                position = LatLng(coordinate[0].toDouble(), coordinate[1].toDouble())
+        mapViewModel.connectData.observe(viewLifecycleOwner){
+            var i = 0
+            while(i<it.size){
+                Marker().apply {
+                    map = naverMap
+                    val coordinate= it[i].pos.split(",")
+                    position = LatLng(coordinate[0].toDouble(), coordinate[1].toDouble())
+                }
+                i++
             }
-            i++
         }
-        return showMarker
+
     }
 
-    fun getMarkerInfo(mark : Marker, info: InfoWindow){
+//    private fun createMarkers(nMap: NaverMap, info: InfoWindow) : List<Marker>{
+//        var i = 0
+//        val posZip = mapViewModel.parsePosData()
+//        val showMarker = mutableListOf<Marker>()
+//        while( i < posZip.size ){
+//            Marker().apply {
+//                map = nMap
+//                val coordinate= posZip[i].pos.split(",")
+//                position = LatLng(coordinate[0].toDouble(), coordinate[1].toDouble())
+//            }
+//            i++
+//        }
+//        return showMarker
+//    }
+
+    private fun getMarkerInfo(mark : Marker, info: InfoWindow){
         mark.apply{
             setOnClickListener {
                 info.open(this)
@@ -193,6 +199,6 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
         // inner class 부분에서 뷰 바인딩 해제 시키기 위한 방법
         //InfoWindowAdapter(requireContext(), null).adapterBinding = null
 
-        mapViewModel.disconnectMQTT()
+        //mapViewModel.disconnectMQTT()
     }
 }

@@ -159,13 +159,12 @@ class ClientFragment : Fragment() {
             val topic   = binding.edittextSubtopic.text.toString()
 
             if (mqttClient.isConnected()) {
-                mqttClient.subscribe(topic,
-                    1,
+                mqttClient.subscribe(
+                    topic, 1,
                     object : IMqttActionListener {
                         override fun onSuccess(asyncActionToken: IMqttToken?) {
                             val msg = "Subscribed to: $topic"
                             Log.d(this.javaClass.name, msg)
-
                             Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                         }
 

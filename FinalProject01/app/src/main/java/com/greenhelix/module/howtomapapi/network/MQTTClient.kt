@@ -9,62 +9,63 @@ class MQTTClient(context: Context?,
                  serverURI: String,
                  clientID: String = "") {
     private var mqttClient = MqttAndroidClient(context, serverURI, clientID)
+
     private val defaultCbConnect = object : IMqttActionListener {
         override fun onSuccess(asyncActionToken: IMqttToken?) {
-            Log.d(this.javaClass.name, "(Default) Connection success")
+            Log.d("IK", "(Default) Connection success")
         }
 
         override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-            Log.d(this.javaClass.name, "Connection failure: ${exception.toString()}")
+            Log.d("IK", "Connection failure: ${exception.toString()}")
         }
     }
     private val defaultCbClient = object : MqttCallback {
         override fun messageArrived(topic: String?, message: MqttMessage?) {
-            Log.d(this.javaClass.name, "Receive message: ${message.toString()} from topic: $topic")
+            Log.d("IK", "Receive message: ${message.toString()} from topic: $topic")
         }
 
         override fun connectionLost(cause: Throwable?) {
-            Log.d(this.javaClass.name, "Connection lost ${cause.toString()}")
+            Log.d("IK", "Connection lost ${cause.toString()}")
         }
 
         override fun deliveryComplete(token: IMqttDeliveryToken?) {
-            Log.d(this.javaClass.name, "Delivery completed")
+            Log.d("IK", "Delivery completed")
         }
     }
     private val defaultCbSubscribe = object : IMqttActionListener {
         override fun onSuccess(asyncActionToken: IMqttToken?) {
-            Log.d(this.javaClass.name, "Subscribed to topic")
+            Log.d("IK", "Subscribed to topic")
         }
 
         override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-            Log.d(this.javaClass.name, "Failed to subscribe topic")
+            Log.d("IK", "Failed to subscribe topic")
         }
     }
     private val defaultCbUnsubscribe = object : IMqttActionListener {
         override fun onSuccess(asyncActionToken: IMqttToken?) {
-            Log.d(this.javaClass.name, "Unsubscribed to topic")
+            Log.d("IK", "Unsubscribed to topic")
         }
 
         override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-            Log.d(this.javaClass.name, "Failed to unsubscribe topic")
+            Log.d("IK", "Failed to unsubscribe topic")
         }
     }
     private val defaultCbPublish = object : IMqttActionListener {
         override fun onSuccess(asyncActionToken: IMqttToken?) {
-            Log.d(this.javaClass.name, "Message published to topic")
+            Log.d("IK", "Message published to topic")
         }
 
         override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-            Log.d(this.javaClass.name, "Failed to publish message to topic")
+            Log.d("IK", "Failed to publish message to topic")
         }
     }
     private val defaultCbDisconnect = object : IMqttActionListener {
         override fun onSuccess(asyncActionToken: IMqttToken?) {
-            Log.d(this.javaClass.name, "Disconnected")
+            Log.d("IK", "Disconnected")
         }
 
         override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
-            Log.d(this.javaClass.name, "Failed to disconnect")
+            Log.d("IK", "Failed to disconnect")
         }
     }
 

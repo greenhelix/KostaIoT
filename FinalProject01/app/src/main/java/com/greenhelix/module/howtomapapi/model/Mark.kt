@@ -1,6 +1,6 @@
 package com.greenhelix.module.howtomapapi.model
 
-data class Mark(var id: Int,
+data class Mark(var id: String,
                 var sex : String,
                 var num: Int,
                 var percent: Int,
@@ -9,6 +9,6 @@ data class Mark(var id: Int,
                 var name : String
                 ){
 
-    constructor(): this(0, "", 0,0,"","", ""){}
-    constructor(id :Int, pos:String) : this(0, "", 0,0,"","", ""){}
+    constructor(): this("", "", 0,0,"","", ""){}
+    constructor(id :String, pos:String) : this(id, "", 0,0,pos,"", ""){}
 }
