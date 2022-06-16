@@ -1,6 +1,8 @@
 package com.greenhelix.module.howtomapapi.ui.home
 
 import android.content.Context
+import android.content.Intent
+import android.os.Handler
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.LiveData
@@ -13,9 +15,10 @@ import com.greenhelix.module.howtomapapi.model.DAO
 import com.greenhelix.module.howtomapapi.model.DATA2
 import com.greenhelix.module.howtomapapi.model.Mark
 import com.greenhelix.module.howtomapapi.network.MQTTClient
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import org.eclipse.paho.client.mqttv3.*
 import org.json.JSONArray
 import org.json.JSONException
@@ -26,97 +29,74 @@ class MapViewModel : ViewModel()  {
     private val _stName = MutableLiveData<String>()
     private val _stDesc = MutableLiveData<String>()
     private val _stPercent = MutableLiveData<Int>()
-    private val temp = mutableListOf<Mark>()
-    private val _connectData = MutableLiveData<MutableList<Mark>>()
-    private val _dataPos = MutableLiveData<String>()
-    val dataPos : LiveData<String> = _dataPos
-    var connectData : LiveData<MutableList<Mark>> = _connectData
+
+
+    private var markers : MutableList<Mark> = mutableListOf()
+    private var infoWindows : MutableList<Mark> = mutableListOf()
+
+
     var stPercent : LiveData<Int> = _stPercent
     var stName : LiveData<String> = _stName
     val stDesc : LiveData<String> = _stDesc
 
-    private val dao : DAO = DAO()
+    private var  dao : DAO = DAO()
     private var data = ""
 
-    fun conMQTT(context : Context) {
-        viewModelScope.launch {
-            _dataPos.value = dao.connectMQTT(context)
-            Log.d("IK","MapViewModel::conMQTT::connectMQTT::result ${_dataPos.value}")
-
-//            dao.parsePosData().collect{
-//                Log.d("IK", "MapViewModel::parsePosData::connectMQTT::collectData:: $it")
-//                _connectData.value = it
-//            }
-        }
+    fun conMQTT(context : Context)  {
+        viewModelScope.launch(Dispatchers.IO) {  dao.connectMQTT(context) }
     }
 
     fun disconnectMQTT(){ dao.disconnectMQTT() }
 
-//    fun parsePosData():List<Mark>{
-//
-//        Log.d("IK", "connectMQTT::dataPos:: $dataPos")
-//        val temPos = mutableListOf<Mark>()
-//
-//
-//        try{
-//            val jsonData = JSONObject(dataPos)
-//            val jsonArray :JSONArray?= jsonData.optJSONArray("data")
-//            var i = 0
-//            while(i<jsonArray!!.length()){
-//                val jsonObject = jsonArray.getJSONObject(i)
-//                temPos.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("coord")))
-//                i++
-//            }
-//        }catch (e:JSONException){
-//            Log.d("IK", "$e")
-//        }
-//
-//
-//        return temPos
-//    }
 
-    fun parseData(): List<Mark>{
+    fun parsePosData(){
 
-//        if(data == ""){Log.d("IK", "no DATA")}
+        viewModelScope.launch {
+            withTimeout(10000){
+                dao.getData().collect{
+                    data = it
+                }
+            }
+        }
 
-//        data = DATA2  // msg 가 들어온다.
-
-        Log.d("IK", "parseData::DATA:: $data")
-
-        try{
+        Log.d("IK", "MapViewModel::parsePosData:: $data")
+        if(data != ""){
             val jsonData = JSONObject(data)
             val jsonArray :JSONArray?= jsonData.optJSONArray("data")
             var i = 0
-
             while(i<jsonArray!!.length()){
-                val mark  = Mark()
                 val jsonObject = jsonArray.getJSONObject(i)
-                mark.id = jsonObject.getString("marketID")
-                mark.num = jsonObject.getInt("num")
-                mark.percent = jsonObject.getInt("percent")
-                mark.pos = jsonObject.getString("coord")
-                mark.describe = jsonObject.getString("name")
-                mark.name = jsonObject.getString("describe")
+                markers.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("coord")))
+                //MapViewModel::parsePosData:: {"marketID":"003-010","coord":"37.514438,126.894203"} 이렇게 잘들어간다.
                 i++
-                temp.add(mark)
             }
-
-        }catch (e:JSONException){
-            Log.d("IK", "$e")
+            Log.d("IK", "MapViewModel::parsePosData::🔽🔽\n$markers")
         }
-        return temp
     }
 
-    fun getSize(){
-//        return temp.size
+    fun makeMarks()= callbackFlow {
+        trySend(markers)
+        awaitClose()
     }
 
-    fun showData(){
-//        _stId.apply{
-//            value = jsonObject.getInt("id")
-//        }
-//        for(i:Int in 0..temp.size){
-//
-//        }
+    fun parseData(){
+
+        Log.d("IK", "parseData::DATA:: $data")
+
+        val jsonData = JSONObject(data)
+        val jsonArray :JSONArray?= jsonData.optJSONArray("data")
+        var i = 0
+        while(i<jsonArray!!.length()){
+            val jsonObject = jsonArray.getJSONObject(i)
+            infoWindows.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("marketName"),
+            jsonObject.getString("about"), jsonObject.getInt("ratio")))
+            i++
+        }
+        Log.d("IK", "MapViewModel::parseData::🔽🔽\n$infoWindows")
     }
+
+    fun getSize(): Int{
+        return markers.size
+    }
+
 }

@@ -1,14 +1,12 @@
 package com.greenhelix.module.howtomapapi.model
 
-data class Mark(var id: String,
-                var sex : String,
-                var num: Int,
-                var percent: Int,
+data class Mark(var marketID: String,
                 var pos : String,
-                var describe : String,
-                var name : String
+                var marketName : String,
+                var about : String,
+                var ratio: Int
                 ){
 
-    constructor(): this("", "", 0,0,"","", ""){}
-    constructor(id :String, pos:String) : this(id, "", 0,0,pos,"", ""){}
+    constructor(id :String, pos:String) : this(id, pos,"","", 0)
+    constructor(id :String, name:String, describe:String, percent:Int):this(id, "", name, describe, percent)
 }

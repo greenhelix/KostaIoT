@@ -13,6 +13,19 @@
         android:layout_height="match_parent"
         android:name="com.naver.maps.map.MapFragment" />
 
+    <ImageButton
+        android:id="@+id/btn_naver_map_refresh"
+        android:layout_width="50sp"
+        android:layout_height="50sp"
+        android:layout_marginBottom="10sp"
+        android:layout_marginEnd="10sp"
+        android:elevation="3sp"
+        android:background="@drawable/btn_shadow"
+        android:src="@drawable/ic_black_refresh_30"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
 <!--    <com.naver.maps.map.widget.LocationButtonView-->
 <!--        android:layout_width="wrap_content"-->
 <!--        android:layout_height="wrap_content"-->

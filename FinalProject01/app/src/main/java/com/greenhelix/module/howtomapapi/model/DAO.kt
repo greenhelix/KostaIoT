@@ -1,27 +1,30 @@
 package com.greenhelix.module.howtomapapi.model
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.core.content.ContextCompat.startActivity
 import com.greenhelix.module.howtomapapi.network.*
+import com.greenhelix.module.howtomapapi.ui.home.MapViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.eclipse.paho.client.mqttv3.*
-import org.json.JSONArray
-import org.json.JSONException
-import org.json.JSONObject
 
 class DAO {
 
     private lateinit var mqttClient : MQTTClient
     private val serverURI   = "tcp://test.mosquitto.org:1883"
+    var msg = ""
 
+    fun connectMQTT(context : Context) {
 
-    fun connectMQTT(context : Context) :String{
-        var msg = ""
         mqttClient = MQTTClient(context, serverURI, "")
+
         mqttClient.connect("", "",
             object : IMqttActionListener {
                 override fun onSuccess(asyncActionToken: IMqttToken?) {
@@ -39,9 +42,16 @@ class DAO {
             object : MqttCallback {
                 override fun messageArrived(topic: String?, message: MqttMessage?) {
                     // 여기가 진짜 메세지를 받는 부분이다!
-                    msg = message.toString()
-                    Log.d("IK", "DAO::connectMQTT::messageArrived::msg::\n$msg")
-                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+                    if (topic == "kosta/coordinate"){
+                        Log.d("IK", "DAO::connectMQTT::messageArrived::msg::\n$message")
+                        Toast.makeText(context, "DATA\n$message", Toast.LENGTH_SHORT).show()
+
+                        msg = message.toString()
+
+                    }else{
+                        Log.d("IK", "DAO::connectMQTT::messageArrived::msg:: not yet")
+                    }
+
                 }
 
                 override fun connectionLost(cause: Throwable?) {
@@ -54,38 +64,13 @@ class DAO {
             }
         )
 
-        Log.d("IK", "DAO::connectMQTT::result:: $msg")
-
-        return msg
     }
 
-//    fun parsePosData()= callbackFlow{
-//
-//        Log.d("IK", "DAO::parsePosData::dataPos:: $msg")
-//        val temPos = mutableListOf<Mark>()
-//
-//        if(msg != ""){
-//
-//            try{
-//                val jsonData = JSONObject(msg)
-//                val jsonArray : JSONArray?= jsonData.optJSONArray("data")
-//                var i = 0
-//                while(i<jsonArray!!.length()){
-//                    val jsonObject = jsonArray.getJSONObject(i)
-//                    temPos.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("coord")))
-//                    i++
-//                }
-//            }catch (e: JSONException){
-//                Log.d("IK", "$e")
-//            }
-//        }else{
-//            Log.d("IK", "No dataPos in parsePosData()")
-//        }
-//        Log.d("IK", "DAO::parsePosData::temPos:: $temPos")
-//        this.trySend(temPos)
-//        awaitClose()
-////        return temPos
-//    }
+
+    fun getData() = callbackFlow {
+        trySend(msg)
+        awaitClose()
+    }
 
     fun subscribeDB(topic : String){
         Log.d("IK", "topic:: $topic")

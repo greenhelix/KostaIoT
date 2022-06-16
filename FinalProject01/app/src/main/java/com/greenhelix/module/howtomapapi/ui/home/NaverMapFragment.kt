@@ -11,19 +11,27 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.greenhelix.module.howtomapapi.R
 import com.greenhelix.module.howtomapapi.databinding.FragmentNaverMapBinding
 import com.greenhelix.module.howtomapapi.databinding.WindowInfoCustomBinding
+import com.greenhelix.module.howtomapapi.model.Mark
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.InfoWindow
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import com.naver.maps.map.util.MarkerIcons
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 class NaverMapFragment : Fragment(), OnMapReadyCallback{
 
-//    private lateinit var
     private lateinit var mapViewModel: MapViewModel
     private var _binding: FragmentNaverMapBinding? = null
     private val binding get() = _binding!!
@@ -44,7 +52,8 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
             }
         }
     }
-
+    private var vmMarkers : MutableList<Mark>? = null
+    private var vmMarkerInfos : MutableList<Mark>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,8 +65,7 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-
-        mapViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[MapViewModel::class.java]
+        mapViewModel= ViewModelProvider(requireActivity())[MapViewModel::class.java]
         _binding = FragmentNaverMapBinding.inflate(inflater, container, false)
         contain = container
         locationSource = FusedLocationSource(this, 1000 )
@@ -70,6 +78,10 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
 
         mapFragment.getMapAsync(this)
 
+        binding.btnNaverMapRefresh.setOnClickListener {
+
+            mapFragment.getMapAsync(this)
+        }
         return binding.root
     }
 
@@ -122,8 +134,24 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
         }
     }
 
+    override fun onResume() {
+        Log.d("IK", "onResume")
+        super.onResume()
+    }
+
+    override fun onPause() {
+        Log.d("IK", "onPause")
+        super.onPause()
+    }
+
+    override fun onStop() {
+        Log.d("IK", "onStop")
+        super.onStop()
+    }
+
     override fun onMapReady(naverMap: NaverMap) {
-        Log.d("ik", "onMapReady")
+
+        Log.d("IK", "onMapReady")
         val locate = locationSource
         val infoWindow = InfoWindow().apply {
             setOnClickListener {
@@ -131,6 +159,9 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
                 true
             }
         }
+
+        mapViewModel.parsePosData()
+
         naverMap.apply {
             locationSource = locate
             cameraPosition = CameraPosition(
@@ -147,38 +178,39 @@ class NaverMapFragment : Fragment(), OnMapReadyCallback{
                 infoWindow.close()
             }
             moveCamera(CameraUpdate.scrollTo(LatLng(37.5139, 126.8926)))  // 문래역 쪽 카메라 위치
-
-
         }
 
-        mapViewModel.connectData.observe(viewLifecycleOwner){
+        lifecycleScope.launch{
+            mapViewModel.makeMarks().collect{
+                vmMarkers = it
+            }
+        }
+
+        lifecycleScope.launch{
+            mapViewModel
+        }
+
+        Log.d("IK" , "NaverMapFragment::connectData::observe::${vmMarkers}")
+
+        if(vmMarkers!=null){
             var i = 0
-            while(i<it.size){
+            while(i<vmMarkers!!.size){
                 Marker().apply {
-                    map = naverMap
-                    val coordinate= it[i].pos.split(",")
+                    Log.d("IK" , "NaverMapFragment::connectData::observe::${vmMarkers!![i]}")
+                    val coordinate= vmMarkers!![i].pos.split(",")
                     position = LatLng(coordinate[0].toDouble(), coordinate[1].toDouble())
+                    icon = MarkerIcons.BLUE
+                    map = naverMap
+                    setOnClickListener {
+                        infoWindow.open(this)
+                        infoWindow.adapter = InfoWindowAdapter(requireContext(), vmMarkerInfos!![i].marketID)
+                        true
+                    }
                 }
                 i++
             }
         }
-
     }
-
-//    private fun createMarkers(nMap: NaverMap, info: InfoWindow) : List<Marker>{
-//        var i = 0
-//        val posZip = mapViewModel.parsePosData()
-//        val showMarker = mutableListOf<Marker>()
-//        while( i < posZip.size ){
-//            Marker().apply {
-//                map = nMap
-//                val coordinate= posZip[i].pos.split(",")
-//                position = LatLng(coordinate[0].toDouble(), coordinate[1].toDouble())
-//            }
-//            i++
-//        }
-//        return showMarker
-//    }
 
     private fun getMarkerInfo(mark : Marker, info: InfoWindow){
         mark.apply{
