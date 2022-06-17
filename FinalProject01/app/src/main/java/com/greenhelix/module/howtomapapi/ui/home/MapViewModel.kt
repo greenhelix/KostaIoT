@@ -49,10 +49,10 @@ class MapViewModel : ViewModel()  {
     fun disconnectMQTT(){ dao.disconnectMQTT() }
 
 
-    fun parsePosData(){
+    fun parseData(){
 
         viewModelScope.launch {
-            withTimeout(10000){
+            withTimeout(3000){
                 dao.getData().collect{
                     data = it
                 }
@@ -66,8 +66,17 @@ class MapViewModel : ViewModel()  {
             var i = 0
             while(i<jsonArray!!.length()){
                 val jsonObject = jsonArray.getJSONObject(i)
-                markers.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("coord")))
-                //MapViewModel::parsePosData:: {"marketID":"003-010","coord":"37.514438,126.894203"} 이렇게 잘들어간다.
+                if(jsonObject.length() == 2){
+                    markers.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("coord")))
+                }
+                else if(jsonObject.length() > 2){
+                    markers.add(Mark(jsonObject.getString("marketID"),
+                        jsonObject.getString("coord"),
+                        jsonObject.getString("marketName"),
+                        jsonObject.getString("about"),
+                        jsonObject.getInt("ratio")
+                    ))
+                }
                 i++
             }
             Log.d("IK", "MapViewModel::parsePosData::🔽🔽\n$markers")
@@ -79,21 +88,28 @@ class MapViewModel : ViewModel()  {
         awaitClose()
     }
 
-    fun parseData(){
-
-        Log.d("IK", "parseData::DATA:: $data")
-
-        val jsonData = JSONObject(data)
-        val jsonArray :JSONArray?= jsonData.optJSONArray("data")
-        var i = 0
-        while(i<jsonArray!!.length()){
-            val jsonObject = jsonArray.getJSONObject(i)
-            infoWindows.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("marketName"),
-            jsonObject.getString("about"), jsonObject.getInt("ratio")))
-            i++
-        }
-        Log.d("IK", "MapViewModel::parseData::🔽🔽\n$infoWindows")
-    }
+//    fun parseData(){
+//        viewModelScope.launch {
+//            withTimeout(10000){
+//                dao.getData().collect{
+//                    data = it
+//                }
+//            }
+//        }
+//
+//        Log.d("IK", "parseData::DATA:: $data")
+//
+//        val jsonData = JSONObject(data)
+//        val jsonArray :JSONArray?= jsonData.optJSONArray("data")
+//        var i = 0
+//        while(i<jsonArray!!.length()){
+//            val jsonObject = jsonArray.getJSONObject(i)
+//            infoWindows.add(Mark(jsonObject.getString("marketID"), jsonObject.getString("marketName"),
+//            jsonObject.getString("about"), jsonObject.getInt("ratio")))
+//            i++
+//        }
+//        Log.d("IK", "MapViewModel::parseData::🔽🔽\n$infoWindows")
+//    }
 
     fun getSize(): Int{
         return markers.size

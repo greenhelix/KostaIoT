@@ -31,6 +31,7 @@ class DAO {
                     Log.d("IK", "MQTT 연결성공")
                     Toast.makeText(context, "MQTT -> 연결 성공!", Toast.LENGTH_SHORT).show()
                     subscribeDB("kosta/coordinate")
+                    subscribeDB("kosta/data")
                 }
 
                 override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
@@ -42,13 +43,19 @@ class DAO {
             object : MqttCallback {
                 override fun messageArrived(topic: String?, message: MqttMessage?) {
                     // 여기가 진짜 메세지를 받는 부분이다!
-                    if (topic == "kosta/coordinate"){
+                    if (topic == "kosta/coordinate") {
+                        Log.d("IK", "DAO::connectMQTT::messageArrived::msg::\n$message")
+                        Toast.makeText(context, "COORDINATE\n$message", Toast.LENGTH_SHORT).show()
+
+                        msg = message.toString()
+                    }
+                    else if (topic == "kosta/data") {
                         Log.d("IK", "DAO::connectMQTT::messageArrived::msg::\n$message")
                         Toast.makeText(context, "DATA\n$message", Toast.LENGTH_SHORT).show()
 
                         msg = message.toString()
-
-                    }else{
+                    }
+                    else{
                         Log.d("IK", "DAO::connectMQTT::messageArrived::msg:: not yet")
                     }
 
